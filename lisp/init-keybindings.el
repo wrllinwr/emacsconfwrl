@@ -23,5 +23,5 @@
   (other-window 1))
 
 (global-set-key (kbd "C-j") 'goto-line)
-
+(global-set-key (kbd "C-c p f") 'counsel-git)
 (provide 'init-keybindings)

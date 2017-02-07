@@ -4,7 +4,9 @@
   ;;autoload will load these function of that file
   (require 'package)
   (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/")) t)
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
+  '("marmalade" . "https://marmalade-repo.org/packages/")
+  '("org" . "http://orgmode.org/elpa/") t)
 
 (require 'cl)
 (defvar my/packages '(
@@ -19,8 +21,10 @@
 		      js2-mode
 		      nodejs-repl
 		      popwin
+		      sr-speedbar
+		      tabbar-ruler
+		      yasnippet
 		      ) "Default packages")
-
 
 (setq package-selected-packages my/packages)
 
@@ -63,3 +67,16 @@
        auto-mode-alist))
 
 (provide 'init-packages)
+
+;;tabbar-ruler
+(add-hook 'after-init-hook '(lambda ()
+			      (tabbar-ruler-up)))
+;;(setq tabbar-ruler-global-tabbar t) ;;get tabbar
+;;(setq tabbar-ruler-global-ruler t) ;;get ruler
+;;(setq tabbar-ruler-popup-menu t) ;;get popmenu
+;;(setq tabbar-ruler-popup-toolbar t) ;;get popup toolbar
+;;(setq tabbar-ruler-popup-scrollbar t) ;;get popup scroll
+
+;;config yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
