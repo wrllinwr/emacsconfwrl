@@ -1,3 +1,4 @@
+;;; package ---Summary
 (when (>= emacs-major-version 24)
   ;;魔法注释,in source code user ;;;### tag the function
   ;;every package complete general the autoload-packagename.el
@@ -22,8 +23,20 @@
 		      nodejs-repl
 		      popwin
 		      sr-speedbar
-		      tabbar-ruler
+;;		      tabbar-ruler
 		      yasnippet
+		      web-mode
+		      expand-region
+		      iedit
+		      helm-ag
+		      flycheck
+		      auto-yasnippet
+		      evil
+		      evil-leader
+		      window-numbering
+		      powerline
+		      evil-surround
+		      mwe-log-commands
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
@@ -63,14 +76,14 @@
 ;;config js2-mode
 (setq auto-mode-alist
       (append
-       '(("\\.js" . js2-mode))
+       '(("\\.js" . js2-mode)
+	 ("\\.html" . web-mode))
        auto-mode-alist))
 
-(provide 'init-packages)
 
 ;;tabbar-ruler
-(add-hook 'after-init-hook '(lambda ()
-			      (tabbar-ruler-up)))
+;;(add-hook 'after-init-hook '(lambda ()
+;;			      (tabbar-ruler-up)))
 ;;(setq tabbar-ruler-global-tabbar t) ;;get tabbar
 ;;(setq tabbar-ruler-global-ruler t) ;;get ruler
 ;;(setq tabbar-ruler-popup-menu t) ;;get popmenu
@@ -80,3 +93,17 @@
 ;;config yasnippet
 (require 'yasnippet)
 (yas-global-mode 1)
+(require 'expand-region)
+(add-hook 'js2-mode-hook 'flycheck-mode-hook)
+(evil-mode 1)
+(global-evil-leader-mode)
+(evil-leader/set-key
+  "e" 'find-file
+  "b" 'switch-to-buffer
+  "k" 'kill-buffer)
+(window-numbering-mode t)
+(setq window-numbering-assign-func
+      (lambda () (when (equal (buffer-name) "*Calculator*") 9)))
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+(provide 'init-packages)
