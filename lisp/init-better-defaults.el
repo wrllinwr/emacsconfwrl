@@ -1,4 +1,4 @@
-(setq make-backup-files nil)
+
 
 (setq recentf-max-menu-item 30)
 (defadvice show-paren-function (around fix-show-paren-function activate)
@@ -91,5 +91,5 @@
 	      (regexp-quote sym))))
 	regexp-history)
   (call-interactively 'occur))
-
+(which-key-mode 1)
 (provide 'init-better-defaults)

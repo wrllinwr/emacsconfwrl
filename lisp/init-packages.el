@@ -7,6 +7,7 @@
   (package-initialize)
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
   '("marmalade" . "https://marmalade-repo.org/packages/")
+  '("gun" . "http://elpa.emacs-china.org/gun/")
   '("org" . "http://orgmode.org/elpa/") t)
 
 (require 'cl)
@@ -95,7 +96,7 @@
 (yas-global-mode 1)
 (require 'expand-region)
 (add-hook 'js2-mode-hook 'flycheck-mode-hook)
-(evil-mode 1)
+(evil-mode -1)
 (global-evil-leader-mode)
 (evil-leader/set-key
   "e" 'find-file

@@ -43,5 +43,6 @@
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (setcdr evil-insert-state-map nil)
 (define-key evil-insert-state-map [escape] 'evil-normal-state)
-(provide 'init-keybindings)
 (setcdr evil-insert-state-map nil)
+(global-set-key (kbd "C-c n") 'evil-normal-state)
+(provide 'init-keybindings)
