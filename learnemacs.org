@@ -1,5 +1,23 @@
 * URL
 * MODE
 **org-mode
+**dired-mode
+C-x d 进入dired mode
+C-x d +创件文件夹
+C-x C-f to create file
+in the dired mode type "g" refresh dired buffer
+d:tag a file will be delete
+x:execute the tag opertion
+D:delete the file right now
+R:rename files
+U:撤消tag
+C:copy file
 * PROGRAM
 * IDE
+* HISTORY
+**emacs
+GUN 1976
+**lisp
+john MaCarthy 1958
+**evel
+评价函数(evel)主流语言没有实现评价函数
