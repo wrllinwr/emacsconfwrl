@@ -1,5 +1,3 @@
-
-
 (setq recentf-max-menu-item 30)
 (defadvice show-paren-function (around fix-show-paren-function activate)
   (cond ((looking-at-p "\\s(") ad-do-it)

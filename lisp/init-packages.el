@@ -5,8 +5,8 @@
   ;;autoload will load these function of that file
   (require 'package)
   (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/"))
-  '("marmalade" . "https://marmalade-repo.org/packages/")
+  (add-to-list 'package-archives '("melpa" . "http://elpa.emacs-china.org/melpa/"))
+  '("marmalade" . "http://marmalade-repo.org/packages/")
   '("gun" . "http://elpa.emacs-china.org/gun/")
   '("org" . "http://orgmode.org/elpa/") t)
 
@@ -38,6 +38,7 @@
 		      powerline
 		      evil-surround
 		      mwe-log-commands
+		      smex
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
@@ -107,4 +108,6 @@
       (lambda () (when (equal (buffer-name) "*Calculator*") 9)))
 (require 'evil-surround)
 (global-evil-surround-mode 1)
+(setq winner-dont-bind-my-keys t)
+(winner-mode t)
 (provide 'init-packages)
