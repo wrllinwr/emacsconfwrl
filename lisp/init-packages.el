@@ -39,6 +39,7 @@
 		      evil-surround
 		      mwe-log-commands
 		      smex
+		      auto-complete
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
@@ -110,4 +111,6 @@
 (global-evil-surround-mode 1)
 (setq winner-dont-bind-my-keys t)
 (winner-mode t)
+(ac-config-default)
+(require 'auto-complete-config)
 (provide 'init-packages)

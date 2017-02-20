@@ -5,6 +5,7 @@
 (require 'init-better-defaults)
 (require 'init-keybindings)
 (require 'init-custome)
+(require 'init-program-for-c)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -24,5 +25,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(iedit-occurrence ((t (:inherit region)))))
-
-
+(setenv "PATH" (concat "/usr/local/bin/;" (getenv "PATH")))
+(setq exec-path (append exec-path '("/usr/local/bin/")))
