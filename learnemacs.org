@@ -1,7 +1,7 @@
 * URL
 * MODE
 **org-mode
-**dired-mode
+** dired-mode
 C-x d 进入dired mode
 C-x d +创件文件夹
 C-x C-f to create file
@@ -12,8 +12,12 @@ D:delete the file right now
 R:rename files
 U:撤消tag
 C:copy file
-* PROGRAM
 * IDE
+** C语言开发环境
+gtags变量函数跳转
+ctrl-] 调转到函数定义的文件
+ctrl-t 返回使用跳转处
+:tags列出tags行踪
 * HISTORY
 **emacs
 GUN 1976
