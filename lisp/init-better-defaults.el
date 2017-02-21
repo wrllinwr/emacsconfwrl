@@ -21,16 +21,12 @@
 ;;set popwin. when you look for a function or variable will
 ;;display a new buffer to discription the function,the course
 ;;on the new window,type the 'q' close the window
-(abbrev-mode t) ;;how config it to global?
+ ;;how config it to global.
+(abbrev-mode t)
 (define-abbrev-table 'global-abbrev-table '(
 					    ("i18n" "internationliztion")
 					    ("wrl" "linweiran")
 					    ))
-
-;;move line up
-(global-set-key [(meta up)] 'move-text-line-up)
-;;move line down
-(global-set-key [(meta down)] 'move-text-line-down)
 
 ;; disable ido faces to see flx highlights.
 (setq ido-enable-flex-matching t)
@@ -74,7 +70,8 @@
 					try-complete-lisp-symbol))
 
 (put 'dired-find-alternate-file 'disabled nil)
-(require 'dired-x);;C-x C-j dired by name open the current file diredmode
+;;C-x C-j dired by name open the current file diredmode
+(require 'dired-x)
 (setq dired-dwim-target t)
 
 (defun occur-dwim ()
@@ -90,4 +87,6 @@
 	regexp-history)
   (call-interactively 'occur))
 (which-key-mode 1)
+;;关闭自动备份文件
+(setq make-backup-files nil)
 (provide 'init-better-defaults)

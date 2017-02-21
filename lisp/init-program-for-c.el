@@ -7,24 +7,21 @@
 ;;        (define-key gtags-mode-map "\C-b" 'scroll-down)
 ;;))
 (add-hook 'gtags-select-mode-hook
-  '(lambda ()
-        (setq hl-line-face 'underline)
-        (hl-line-mode 1)
-))
+	  '(lambda ()
+	     (setq hl-line-face 'underline)
+	     (hl-line-mode 1)
+	     ))
 (add-hook 'c-mode-hook
-  '(lambda ()
-        (gtags-mode 1)))
- ;Customization
+	  '(lambda ()
+	     (gtags-mode 1)))
+;;为什么没有起作用
+(add-hook 'c++-mode-hook
+	  '(lambda ()
+	     (gtags-mode 1)))
+;;Customization
 (setq gtags-suggested-key-mapping t)
 (setq gtags-auto-update t)
 (setq ac-trigger-commands
       (cons 'backward-delete-char-untabify ac-trigger-commands))
-
-;;config auto-complete
-(setq ac-use-menu-map t)
-(setq ac-use-quick-help t)
-(require 'auto-complete-config)
-(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20170124.1845/dict")
-(ac-config-default)
 
 (provide 'init-program-for-c)
