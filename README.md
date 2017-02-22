@@ -19,7 +19,7 @@ emacs配置,用于自学及备份。
 				      (newline)))
     
 #install
-首先需要按照emacs,我的版本是GNU Emacs 24.5.1。
+首先需要安装emacs,我的版本是GNU Emacs 24.5.1。
 git clone https://github.com/wrllinwr/emacsconfwrl.git
 
 将emacsconfwrl目录下的内容拷贝到你的.emacs.d目录中，并且删除
