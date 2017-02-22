@@ -5,7 +5,9 @@
 (require 'init-better-defaults)
 (require 'init-keybindings)
 (require 'init-custome)
-;;(require 'init-program-for-c)
+;;(require 'setup-helm)
+
+          
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -27,4 +29,3 @@
  '(iedit-occurrence ((t (:inherit region)))))
 (setenv "PATH" (concat "/usr/local/bin/;" (getenv "PATH")))
 (setq exec-path (append exec-path '("/usr/local/bin/")))
-;;(require 'setup-helm)

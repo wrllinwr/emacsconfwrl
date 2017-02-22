@@ -1,6 +1,6 @@
 * URL
 * MODE
-**org-mode
+** ort-mode
 ** dired-mode
 C-x d 进入dired mode
 C-x d +创件文件夹
@@ -14,14 +14,28 @@ U:撤消tag
 C:copy file
 * IDE
 ** C语言开发环境
-gtags变量函数跳转
+** *1 gtags变量函数跳转
 ctrl-] 调转到函数定义的文件
 ctrl-t 返回使用跳转处
 :tags列出tags行踪
+** *2 auto-complete代码补全
+;;config auto-complete
+;;start auto-complete with emacs
+(require 'auto-complete)
+;;do default config for auto-complete
+(require 'auto-complete-config)
+** *3 yasnippet 代码段补全
+;;config yasnippet
+(require 'yasnippet)
+(yas-global-mode 1)
+** *4 iedit 同时编辑某个变量函数可能也可以
+(global-set-key (kbd "C-c ;") 'iedit-mode)
+用此快捷键匹配某个字符串，然后编辑
+
 * HISTORY
 **emacs
 GUN 1976
 **lisp
 john MaCarthy 1958
 **evel
-评价函数(evel)主流语言没有实现评价函数
+评价函数(evel)主流语言没有实现评价函
