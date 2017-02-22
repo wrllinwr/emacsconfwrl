@@ -20,13 +20,13 @@ emacs配置,用于自学及备份。
     
 #install
 首先需要安装emacs,我的版本是GNU Emacs 24.5.1。
-git clone https://github.com/wrllinwr/emacsconfwrl.git
+'git clone https://github.com/wrllinwr/emacsconfwrl.git'
 
 将emacsconfwrl目录下的内容拷贝到你的.emacs.d目录中，并且删除
 	~/.emacs文件
 
 如果你已有自己的emacs可以是用如下命令启动：
-emacs -q -l <path-to>/emacsconfwrl/init.el
+'emacs -q -l <path-to>/emacsconfwrl/init.el'
 
 #BUG
 在启动emacs时时间会特别长，大概1分钟左右，正在努力解决。
