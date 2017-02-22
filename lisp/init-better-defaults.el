@@ -89,4 +89,5 @@
 (which-key-mode 1)
 ;;关闭自动备份文件
 (setq make-backup-files nil)
+(desktop-save-mode t)
 (provide 'init-better-defaults)

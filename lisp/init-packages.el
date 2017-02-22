@@ -1,8 +1,5 @@
 ;; package ---Summary
 (when (>= emacs-major-version 24)
-  ;;魔法注释,in source code user ;;;### tag the function
-  ;;every package complete general the autoload-packagename.el
-  ;;autoload will load these function of that file
   (require 'package)
 
   (add-to-list 'package-archives '("melpa" . "http://elpa.emacs-china.org/melpa/"))
@@ -76,6 +73,8 @@
 (ido-ubiquitous-mode 1)
 
 (require 'smartparens-config)
+
+;;这是干啥的
 ;;(add-hook 'emacs-lisp-mode-hook 'smartparens-mode)
 (smartparens-global-mode t)
 (require 'popwin)
@@ -117,18 +116,18 @@
 (setq winner-dont-bind-my-keys t)
 (winner-mode t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;从此往下的配置不太好用
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;从此往下的配置不太好用 启动太慢
 ;;config auto-complete
 ;;start auto-complete with emacs
 (require 'auto-complete)
 ;;do default config for auto-complete
 (require 'auto-complete-config)
 (ac-config-default)
-;;config auto-complete
+
 (setq ac-use-menu-map t)
 (setq ac-use-quick-help t)
 (require 'auto-complete-config)
-;;(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20170124.1845/dict")
+(add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20170124.1845/dict")
 
 
 ;;;;;;;;;添加这段代码emacs启动特别慢
@@ -144,10 +143,10 @@
 ;; ;;;;;;;;;添加这段代码emacs启动特别慢
 
 ;;turn on semantic
-;;(semantic-mode 1)
-;;(defun my:add-semantic-to-autocomplete()
-;;  (add-to-list 'ac-sources 'ac-source-semantic))
-;;(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
+(semantic-mode 1)
+(defun my:add-semantic-to-autocomplete()
+ (add-to-list 'ac-sources 'ac-source-semantic))
+(add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
 
 
 (require 'helm)
@@ -192,7 +191,6 @@
 (helm-autoresize-mode 1)
 
 (helm-mode 1)
-
 
 (setq
  helm-gtags-ignore-case t
@@ -266,4 +264,5 @@
 ;;(define-key c++-mode-map  [(tab)] 'company-complete)
 (add-to-list 'company-backends 'company-c-headers)
 ;;(add-to-list 'company-c-headers-path-system "/usr/include/")
+
 (provide 'init-packages)

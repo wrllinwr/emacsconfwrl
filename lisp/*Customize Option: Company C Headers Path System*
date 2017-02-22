@@ -1,0 +1,17 @@
+For help using this buffer, see Easy Customization in the Emacs manual.
+
+                                          Search 
+
+Operate on all settings in this buffer:
+ Revert...   Apply   Apply and Save 
+
+Hide Company C Headers Path System: Value Menu Repeat:
+INS DEL Directory: /usr/include/
+INS DEL Directory: /usr/local/include/
+INS DEL Directory: /usr/local/Cellar/gtk+/2.24.31_1/include/gtk-2.0/gtk
+INS
+    State : EDITED, shown value does not take effect until you set or save it.
+   List of paths to search for system (i.e. angle-bracket Hide
+   delimited) header files.  Alternatively, a function can be
+   supplied which returns the path list.
+Groups: Company C Headers
