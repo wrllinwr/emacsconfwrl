@@ -11,7 +11,7 @@
 (require 'cl)
 (defvar my/packages '(
 		      company
-		      monokai-theme
+		      ;;monokai-theme
 		      hungry-delete
 		      swiper
 		      counsel
@@ -38,7 +38,7 @@
 		      mwe-log-commands
 		      smex
 		      auto-complete
-		      ;; auto-complete-c-headersa
+		      auto-complete-c-headers
 		      ggtags
 		      helm
 		      helm-gtags
@@ -57,7 +57,7 @@
     (when (not (package-installed-p pkg))
       (package-install pkg))))
 
-(load-theme 'monokai 1)
+;;(load-theme 'monokai 1)
 
 (require 'hungry-delete)
 (global-hungry-delete-mode)
@@ -130,17 +130,17 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20170124.1845/dict")
 
 
-;;;;;;;;;添加这段代码emacs启动特别慢
+;;添加这段代码emacs启动特别慢
 ;;config ac-c-headers
-;; (require 'auto-complete-c-headers) ;;这行导致打开c源文件特别慢一次
-;; (defun my:ac-c-headers-init ()
-;;  (require 'auto-complete-c-headers)
-;;  (add-to-list 'ac-sources 'ac-source-c-headers)
-;;  (add-to-list 'achead:include-directories '"/usr/include/"))
+(require 'auto-complete-c-headers) ;;这行导致打开c源文件特别慢一次
+(defun my:ac-c-headers-init ()
+ (require 'auto-complete-c-headers)
+ (add-to-list 'ac-sources 'ac-source-c-headers)
+ (add-to-list 'achead:include-directories '"/usr/include/"))
 
-;; (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
-;; (add-hook 'c-mode-hook 'my:ac-c-headers-init)
-;; ;;;;;;;;;添加这段代码emacs启动特别慢
+(add-hook 'c++-mode-hook 'my:ac-c-headers-init)
+(add-hook 'c-mode-hook 'my:ac-c-headers-init)
+;;;;;;;;;添加这段代码emacs启动特别慢
 
 ;;turn on semantic
 (semantic-mode 1)
@@ -264,5 +264,6 @@
 ;;(define-key c++-mode-map  [(tab)] 'company-complete)
 (add-to-list 'company-backends 'company-c-headers)
 ;;(add-to-list 'company-c-headers-path-system "/usr/include/")
-
+(setq tramp-ssh-controlmaster-options
+      "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 (provide 'init-packages)

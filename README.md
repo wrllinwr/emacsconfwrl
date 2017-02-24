@@ -1,5 +1,10 @@
 # emacsconfwrl
 emacs配置,用于自学及备份。
+#环境
+我自己的环境是MacOS sierra,GUN Emacs 24.5.1
+安装过GUN Global 6.5.6
+
+#特性
 本配置参照“子龙山人”第二季视频配置学习，按照自身的实用习惯部分功能未参考。
 基本配置完成，C环境基本配置完成,Java Python Ruby Lisp指定语言未开始配置。
 额外增加了两个自己比较喜欢的功能:
@@ -29,4 +34,5 @@ git clone https://github.com/wrllinwr/emacsconfwrl.git
 emacs -q -l path-to/emacsconfwrl/init.el
 
 #BUG
-在启动emacs时时间会特别长，大概1分钟左右，正在努力解决。
+1.在启动emacs时时间会特别长，大概1分钟左右.
+	问题已经消失，原因不知道。只是把主题关闭了，重新安装auto-complete

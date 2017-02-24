@@ -13,7 +13,7 @@
 
 (require 'recentf)
 (recentf-mode 1)
-(global-hl-line-mode 1)
+(global-hl-line-mode -1)
 (delete-selection-mode 1)
 
 (require 'nodejs-repl)
@@ -34,7 +34,7 @@
 (setq ido-use-filename-at-point nil)
 (setq ido-auto-merge-work-directories-length 0)
 (setq ido-use-virtual-buffers t)
-(setq flx-ido-threshold 10000)
+(setq flx-ido-threshold 100)
 (setq ido-default-buffer-method 'selected-window)
 
 (global-set-key [(control return)] '(lambda()

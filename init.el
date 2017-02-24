@@ -15,7 +15,7 @@
  ;; If there is more than one, they won't work right.
  '(company-c-headers-path-system
    (quote
-    ("/usr/include/" "/usr/local/include/" "/usr/local/Cellar/gtk+/2.24.31_1/include/gtk-2.0/gtk")))
+    ("/usr/include/" "/usr/local/include/")))
  '(custom-safe-themes
    (quote
     ("c7a9a68bd07e38620a5508fef62ec079d274475c8f92d75ed0c33c45fbe306bc" default)))
