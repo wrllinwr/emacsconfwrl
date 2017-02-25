@@ -10,52 +10,53 @@
 
 (require 'cl)
 (defvar my/packages '(
-		      company
-		      ;;monokai-theme
-		      hungry-delete
-		      swiper
-		      counsel
-		      flx-ido
-		      ido-ubiquitous
-		      smartparens
-		      js2-mode
-		      nodejs-repl
-			  ;;tabbar-ruler
-		      popwin
-		      sr-speedbar
-		      yasnippet
-		      web-mode
-		      expand-region
-		      iedit
-		      helm-ag
-		      flycheck
-		      auto-yasnippet
-		      evil
-		      evil-leader
-		      window-numbering
-		      powerline
-		      evil-surround
-		      mwe-log-commands
-		      smex
-		      auto-complete
-		      auto-complete-c-headers
-		      ggtags
-		      helm
-		      helm-gtags
-		      ) "Default packages")
+					  company
+					  ;;monokai-theme
+					  solarized-theme
+					  hungry-delete
+					  swiper
+					  counsel
+					  flx-ido
+					  ido-ubiquitous
+					  smartparens
+					  js2-mode
+					  nodejs-repl
+					  ;;tabbar-ruler
+					  popwin
+					  sr-speedbar
+					  yasnippet
+					  web-mode
+					  expand-region
+					  iedit
+					  helm-ag
+					  flycheck
+					  auto-yasnippet
+					  evil
+					  evil-leader
+					  window-numbering
+					  powerline
+					  evil-surround
+					  mwe-log-commands
+					  smex
+					  auto-complete
+					  auto-complete-c-headers
+					  ggtags
+					  helm
+					  helm-gtags
+					  ) "Default packages")
 
 (setq package-selected-packages my/packages)
 
 
 (defun my/packages-installed-p ()
   (loop for pkg in my/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))(unless (my/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg my/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
+		when (not (package-installed-p pkg)) do (return nil)
+		finally (return t)))(unless (my/packages-installed-p)
+							  (message "%s" "Refreshing package database...")
+							  (package-refresh-contents)
+							  (dolist (pkg my/packages)
+								(when (not (package-installed-p pkg))
+								  (package-install pkg))))
 
 ;;(load-theme 'monokai 1)
 
@@ -84,7 +85,7 @@
 (setq auto-mode-alist
       (append
        '(("\\.js" . js2-mode)
-	 ("\\.html" . web-mode))
+		 ("\\.html" . web-mode))
        auto-mode-alist))
 
 
@@ -134,9 +135,9 @@
 ;;config ac-c-headers
 (require 'auto-complete-c-headers) ;;这行导致打开c源文件特别慢一次
 (defun my:ac-c-headers-init ()
- (require 'auto-complete-c-headers)
- (add-to-list 'ac-sources 'ac-source-c-headers)
- (add-to-list 'achead:include-directories '"/usr/include/"))
+  (require 'auto-complete-c-headers)
+  (add-to-list 'ac-sources 'ac-source-c-headers)
+  (add-to-list 'achead:include-directories '"/usr/include/"))
 
 (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
 (add-hook 'c-mode-hook 'my:ac-c-headers-init)
@@ -145,10 +146,12 @@
 ;;turn on semantic
 (semantic-mode 1)
 (defun my:add-semantic-to-autocomplete()
- (add-to-list 'ac-sources 'ac-source-semantic))
+  (add-to-list 'ac-sources 'ac-source-semantic))
 (add-hook 'c-mode-common-hook 'my:add-semantic-to-autocomplete)
 
-
+(custom-set-variables
+ '(helm-gtags-prefix-key "\C-t")
+ '(helm-gtags-suggested-key-mapping t))
 (require 'helm)
 (require 'helm-config)
 
@@ -191,6 +194,7 @@
 (helm-autoresize-mode 1)
 
 (helm-mode 1)
+
 
 (setq
  helm-gtags-ignore-case t
@@ -264,6 +268,97 @@
 ;;(define-key c++-mode-map  [(tab)] 'company-complete)
 (add-to-list 'company-backends 'company-c-headers)
 ;;(add-to-list 'company-c-headers-path-system "/usr/include/")
+
+;;config for helm,helm会影响速度
 (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
+
+;;对tab缩进的优化
+;;from csdn add by linweiran at 2017-2-25
+;;config tab
+;; (setq indent-tabs-mode nil)
+;; (setq default-tab-width 4)
+;; (setq tab-width 4)
+;; (setq tab-stop-list ())
+;; (loop for x downfrom 40 to 1 do
+;;       (setq tab-stop-list (cons (* x 4) tab-stop-list)))
+
+;; (defconst my-c-style
+;;   '((c-tab-always-indent        . t)
+;;     (c-comment-only-line-offset . 4)
+;;     (c-hanging-braces-alist     . ((substatement-open after)
+;;                                    (brace-list-open)))
+;;     (c-hanging-colons-alist     . ((member-init-intro before)
+;;                                    (inher-intro)
+;;                                    (case-label after)
+;;                                    (label after)
+;;                                    (access-label after)))
+;;     (c-cleanup-list             . (scope-operator
+;;                                    empty-defun-braces
+;;                                    defun-close-semi))
+;;     (c-offsets-alist            . ((arglist-close . c-lineup-arglist)
+;;                                    (substatement-open . 0)
+;;                                    (case-label        . 4)
+;;                                    (block-open        . 0)
+;;                                    (knr-argdecl-intro . -)))
+;;     (c-echo-syntactic-information-p . t)
+;;     )
+;;   "My C Programming Style")
+
+;; ;; offset customizations not in my-c-style
+;; (setq c-offsets-alist '((member-init-intro . ++)))
+
+;; ;; Customizations for all modes in CC Mode.
+;; (defun my-c-mode-common-hook ()
+;;   ;; add my personal style and set it for the current buffer
+;;   (c-add-style "PERSONAL" my-c-style t)
+;;   ;; other customizations
+;;   (setq tab-width 4
+;;         ;; this will make sure spaces are used instead of tabs
+;;         indent-tabs-mode nil)
+;;   ;; we like auto-newline and hungry-delete
+;;   (c-toggle-auto-hungry-state 1)
+;;   ;; key bindings for all supported languages.  We can put these in
+;;   ;; c-mode-base-map because c-mode-map, c++-mode-map, objc-mode-map,
+;;   ;; java-mode-map, idl-mode-map, and pike-mode-map inherit from it.
+;;   (define-key c-mode-base-map "/C-m" 'c-context-line-break)
+;;   )
+
+;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+
+;;config solarized-theme
+;; make the fringe stand out from the background
+(setq solarized-distinct-fringe-background t)
+
+;; Don't change the font for some headings and titles
+(setq solarized-use-variable-pitch nil)
+
+;; make the modeline high contrast
+(setq solarized-high-contrast-mode-line t)
+
+;; Use less bolding
+(setq solarized-use-less-bold t)
+
+;; Use more italics
+(setq solarized-use-more-italic t)
+
+;; Use less colors for indicators such as git:gutter, flycheck and similar
+(setq solarized-emphasize-indicators nil)
+
+;; Don't change size of org-mode headlines (but keep other size-changes)
+(setq solarized-scale-org-headlines nil)
+
+;; Avoid all font-size changes
+(setq solarized-height-minus-1 1)
+(setq solarized-height-plus-1 1)
+(setq solarized-height-plus-2 1)
+(setq solarized-height-plus-3 1)
+(setq solarized-height-plus-4 1)
+
+(setq x-underline-at-descent-line t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
+(load-theme 'solarized-dark t)
+
+;;solarized-theme end here
+
 (provide 'init-packages)

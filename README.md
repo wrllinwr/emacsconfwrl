@@ -47,5 +47,7 @@ git clone https://github.com/wrllinwr/emacsconfwrl.git
 emacs -q -l path-to/emacsconfwrl/init.el
 
 #BUG
-1.在启动emacs时时间会特别长，大概1分钟左右.
-	问题已经消失，原因不知道。只是把主题关闭了，重新安装auto-complete
+1.[已消失]在启动emacs时时间会特别长，大概1分钟左右。
+问题已经消失，原因不知道。只是把主题关闭了，重新安装auto-complete。
+
+2.[未解决]TAB的代码缩进优化会影响helm-gtags自动加载。
