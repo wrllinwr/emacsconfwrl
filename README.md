@@ -9,19 +9,32 @@ emacs配置,用于自学及备份。
 基本配置完成，C环境基本配置完成,Java Python Ruby Lisp指定语言未开始配置。
 额外增加了两个自己比较喜欢的功能:
 
-    1.M-up 将本行向上移动。已知BUG：当前行移动到格式化区域(缩进区域)被移动的行保持自身缩进
-    (global-set-key [(meta up)] 'move-text-line-up) 
+    1.M-up 将本行向上移动。
+    (global-set-key [(meta up)] 'move-text-line-up)
+	(defun move-line-up()
+		   "Moves current line up."
+  		   (interactive)
+  		   (transpose-lines 1)
+		   (previous-line)
+		   (previous-line)
+		   (indent-for-tab-command))
     
-    2.M-down 将本行向下移动。已知BUG：当前行移动到格式化区域(缩进区域)被移动的行保持自身缩进
+    2.M-down 将本行向下移动。
     (global-set-key [(meta down)] 'move-text-line-down)
-    
+    (defun move-line-down ()
+		   "Moves current line down."
+ 		    (interactive)
+  			(move-text-line-down)
+  			(indent-for-tab-command))
     3.C-RET 在当前行下方新建行（C-o 调用open-line函数，即在当前行上方新建行。也许是我没有找到emacs自身带的快捷键）
-            实现原理利用C-e + RET。
-    (global-set-key [(control return)] '(lambda()
+            实现原理利用C-e + RET + （indent-for-tab-command)。
+			(global-set-key [(control return)] '(lambda()
 				      (interactive)
 				      (move-end-of-line 1)
 				      (message "end of the line")
-				      (newline)))
+				      (newline)
+					  (indent-for-tab-command)
+					  ))
     
 #install
 首先需要安装emacs,我的版本是GNU Emacs 24.5.1。

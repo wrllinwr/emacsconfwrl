@@ -1,10 +1,11 @@
 (global-set-key (kbd "<f2>") 'open-my-init-file)
 
 ;;打开recentf 最近的文件
-(global-set-key (kbd "C-x C-r") 'recentf-open-files)
+(global-set-key (kbd "C-c C-f") 'recentf-open-files)
 
 (global-set-key "\C-s" 'swiper)
 ;;ivy-resume 不知道干啥的 好像开启搜索C-s 并且是上一次的搜索默认词
+;;当python-mode启用时C-c C-r是运行，C-c C-f匹配符号
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "<f6>") 'ivy-resume)
 (global-set-key (kbd "M-x") 'counsel-M-x)
@@ -14,10 +15,10 @@
 
 (add-hook 'js-mode-hook
           '(lambda ()
-	     (define-key js-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-sexp)
-	     (define-key js-mode-map (kbd "C-c C-r") 'nodejs-repl-send-region)
-	     (define-key js-mode-map (kbd "C-c C-l") 'nodejs-repl-load-file)
-	     (define-key js-mode-map (kbd "C-c C-z") 'nodejs-repl-switch-to-repl)))
+			 (define-key js-mode-map (kbd "C-x C-e") 'nodejs-repl-send-last-sexp)
+			 (define-key js-mode-map (kbd "C-c C-r") 'nodejs-repl-send-region)
+			 (define-key js-mode-map (kbd "C-c C-l") 'nodejs-repl-load-file)
+			 (define-key js-mode-map (kbd "C-c C-z") 'nodejs-repl-switch-to-repl)))
 (setq url-automatic-caching t)
 ;;有道词典
 (progn
@@ -79,9 +80,25 @@
                                        (smex-initialize))
                                    (global-set-key [(shift meta x)] 'smex-major-mode-commands)
                                    (smex-major-mode-commands)))
+;;config for tab end here
 
-;;move line up
-(global-set-key [(meta up)] 'move-text-line-up)
-;;move line down
-(global-set-key [(meta down)] 'move-text-line-down)
+(defun move-line-up()
+  "Moves current line up."
+  (interactive)
+  	(transpose-lines 1)
+	(previous-line)
+	(previous-line)
+	(indent-for-tab-command)
+  )
+(defun move-line-down ()
+  "Moves current line down."
+  (interactive)
+  (move-text-line-down)
+  (indent-for-tab-command))
+
+(global-set-key [(meta up)] 'move-line-up)
+(global-set-key [(meta down)] 'move-line-down)
+
 (provide 'init-keybindings)
+
+

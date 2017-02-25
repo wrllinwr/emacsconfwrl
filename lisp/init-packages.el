@@ -20,9 +20,9 @@
 		      smartparens
 		      js2-mode
 		      nodejs-repl
+			  ;;tabbar-ruler
 		      popwin
 		      sr-speedbar
-;;		      tabbar-ruler
 		      yasnippet
 		      web-mode
 		      expand-region
