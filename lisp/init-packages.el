@@ -10,53 +10,53 @@
 
 (require 'cl)
 (defvar my/packages '(
-					  company
-					  ;;monokai-theme
-					  solarized-theme
-					  hungry-delete
-					  swiper
-					  counsel
-					  flx-ido
-					  ido-ubiquitous
-					  smartparens
-					  js2-mode
-					  nodejs-repl
-					  ;;tabbar-ruler
-					  popwin
-					  sr-speedbar
-					  yasnippet
-					  web-mode
-					  expand-region
-					  iedit
-					  helm-ag
-					  flycheck
-					  auto-yasnippet
-					  evil
-					  evil-leader
-					  window-numbering
-					  powerline
-					  evil-surround
-					  mwe-log-commands
-					  smex
-					  auto-complete
-					  auto-complete-c-headers
-					  ggtags
-					  helm
-					  helm-gtags
-					  ) "Default packages")
+		      company
+		      ;;monokai-theme
+		      solarized-theme
+		      hungry-delete
+		      swiper
+		      counsel
+		      flx-ido
+		      ido-ubiquitous
+		      smartparens
+		      js2-mode
+		      nodejs-repl
+		      ;;tabbar-ruler
+		      popwin
+		      sr-speedbar
+		      yasnippet
+		      web-mode
+		      expand-region
+		      iedit
+		      helm-ag
+		      flycheck
+		      auto-yasnippet
+		      evil
+		      evil-leader
+		      window-numbering
+		      powerline
+		      evil-surround
+		      mwe-log-commands
+		      smex
+		      auto-complete
+		      auto-complete-c-headers
+		      ggtags
+		      helm
+		      helm-gtags
+		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
 
 
 (defun my/packages-installed-p ()
   (loop for pkg in my/packages
-		when (not (package-installed-p pkg)) do (return nil)
-		finally (return t)))(unless (my/packages-installed-p)
-							  (message "%s" "Refreshing package database...")
-							  (package-refresh-contents)
-							  (dolist (pkg my/packages)
-								(when (not (package-installed-p pkg))
-								  (package-install pkg))))
+	when (not (package-installed-p pkg)) do (return nil)
+	finally (return t)))(unless (my/packages-installed-p)
+			      (message "%s" "Refreshing package database...")
+			      (package-refresh-contents)
+			      (dolist (pkg my/packages)
+				(when (not (package-installed-p pkg))
+				  (package-install pkg))))
 
 ;;(load-theme 'monokai 1)
 
@@ -85,7 +85,7 @@
 (setq auto-mode-alist
       (append
        '(("\\.js" . js2-mode)
-		 ("\\.html" . web-mode))
+	 ("\\.html" . web-mode))
        auto-mode-alist))
 
 
@@ -131,9 +131,9 @@
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20170124.1845/dict")
 
 
-;;添加这段代码emacs启动特别慢
+
 ;;config ac-c-headers
-(require 'auto-complete-c-headers) ;;这行导致打开c源文件特别慢一次
+(require 'auto-complete-c-headers) 
 (defun my:ac-c-headers-init ()
   (require 'auto-complete-c-headers)
   (add-to-list 'ac-sources 'ac-source-c-headers)
@@ -141,7 +141,7 @@
 
 (add-hook 'c++-mode-hook 'my:ac-c-headers-init)
 (add-hook 'c-mode-hook 'my:ac-c-headers-init)
-;;;;;;;;;添加这段代码emacs启动特别慢
+
 
 ;;turn on semantic
 (semantic-mode 1)

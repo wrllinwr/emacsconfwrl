@@ -95,7 +95,6 @@
   (interactive)
   (move-text-line-down)
   (indent-for-tab-command))
-
 (global-set-key [(meta up)] 'move-line-up)
 (global-set-key [(meta down)] 'move-line-down)
 
