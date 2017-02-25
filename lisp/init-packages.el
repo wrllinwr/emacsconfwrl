@@ -358,7 +358,6 @@
 (setq x-underline-at-descent-line t)
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'solarized-dark t)
-
 ;;solarized-theme end here
 
 (provide 'init-packages)

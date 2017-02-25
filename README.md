@@ -1,7 +1,7 @@
 # emacsconfwrl
 emacs配置,用于自学及备份。
 #环境
-我自己的环境是MacOS sierra,GUN Emacs 24.5.1
+我自己的环境是MacOS sierra,GUN Emacs 24.4.1
 安装过GUN Global 6.5.6
 
 #特性
@@ -37,7 +37,7 @@ emacs配置,用于自学及备份。
 					  ))
     
 #install
-首先需要安装emacs,我的版本是GNU Emacs 24.5.1。
+首先需要安装emacs,我的版本是GNU Emacs 24.4.1。
 git clone https://github.com/wrllinwr/emacsconfwrl.git
 
 将emacsconfwrl目录下的内容拷贝到你的.emacs.d目录中，并且删除
@@ -48,6 +48,8 @@ emacs -q -l path-to/emacsconfwrl/init.el
 
 #BUG
 1.[已消失]在启动emacs时时间会特别长，大概1分钟左右。
-问题已经消失，原因不知道。只是把主题关闭了，重新安装auto-complete。
+	问题已经消失，原因不知道。只是把monokai主题卸载了，重新安装auto-complete。
+	之前用的GUN Emacs 24.5.1在逐步配置的过程中出现启动时间长的问题，现在已经
+	改为GUN Emacs 24.4.1
 
 2.[未解决]TAB的代码缩进优化会影响helm-gtags自动加载。
