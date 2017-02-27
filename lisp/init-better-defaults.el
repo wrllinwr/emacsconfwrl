@@ -96,4 +96,7 @@
 (setq make-backup-files nil)
 ;;(desktop-save-mode t)
 
+;; make ibuffer default
+(defalias 'list-buffers 'ibuffer)
+
 (provide 'init-better-defaults)

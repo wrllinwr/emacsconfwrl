@@ -12,7 +12,9 @@
 (defvar my/packages '(
 		      company
 		      ;;monokai-theme
-		      solarized-theme
+		      ;;solarized-theme
+			  ;;material-theme
+			  ;;zenburn
 		      hungry-delete
 		      swiper
 		      counsel
@@ -21,15 +23,14 @@
 		      smartparens
 		      js2-mode
 		      nodejs-repl
-		      ;;tabbar-ruler
 		      popwin
 		      sr-speedbar
-		      yasnippet
 		      web-mode
 		      expand-region
 		      iedit
 		      helm-ag
 		      flycheck
+		      yasnippet
 		      auto-yasnippet
 		      evil
 		      evil-leader
@@ -57,8 +58,6 @@
 			      (dolist (pkg my/packages)
 				(when (not (package-installed-p pkg))
 				  (package-install pkg))))
-
-;;(load-theme 'monokai 1)
 
 (require 'hungry-delete)
 (global-hungry-delete-mode)
@@ -88,21 +87,16 @@
 	 ("\\.html" . web-mode))
        auto-mode-alist))
 
-
-;;tabbar-ruler
-;;(add-hook 'after-init-hook '(lambda ()
-;;			      (tabbar-ruler-up)))
-;;(setq tabbar-ruler-global-tabbar t) ;;get tabbar
-;;(setq tabbar-ruler-global-ruler t) ;;get ruler
-;;(setq tabbar-ruler-popup-menu t) ;;get popmenu
-;;(setq tabbar-ruler-popup-toolbar t) ;;get popup toolbar
-;;(setq tabbar-ruler-popup-scrollbar t) ;;get popup scroll
-
 ;;config yasnippet
+;;count_of_~red = get_total("~red");
+;;aya-create
+;;count_of_red = get_total("red");
+;;Then call aya-expand
 (require 'yasnippet)
 (yas-global-mode 1)
 (require 'expand-region)
 (add-hook 'js2-mode-hook 'flycheck-mode-hook)
+
 (evil-mode -1)
 (global-evil-leader-mode)
 (evil-leader/set-key
@@ -117,7 +111,6 @@
 (setq winner-dont-bind-my-keys t)
 (winner-mode t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;从此往下的配置不太好用 启动太慢
 ;;config auto-complete
 ;;start auto-complete with emacs
 (require 'auto-complete)
@@ -129,8 +122,6 @@
 (setq ac-use-quick-help t)
 (require 'auto-complete-config)
 (add-to-list 'ac-dictionary-directories "~/.emacs.d/elpa/auto-complete-20170124.1845/dict")
-
-
 
 ;;config ac-c-headers
 (require 'auto-complete-c-headers) 
@@ -194,7 +185,6 @@
 (helm-autoresize-mode 1)
 
 (helm-mode 1)
-
 
 (setq
  helm-gtags-ignore-case t
@@ -273,91 +263,63 @@
 (setq tramp-ssh-controlmaster-options
       "-o ControlMaster=auto -o ControlPath='tramp.%%C' -o ControlPersist=no")
 
-;;对tab缩进的优化
-;;from csdn add by linweiran at 2017-2-25
-;;config tab
-;; (setq indent-tabs-mode nil)
-;; (setq default-tab-width 4)
-;; (setq tab-width 4)
-;; (setq tab-stop-list ())
-;; (loop for x downfrom 40 to 1 do
-;;       (setq tab-stop-list (cons (* x 4) tab-stop-list)))
+;;config tab from csdn add by linweiran at 2017-2-25
+;;C/lah /后面是开启哪些特性
+;; l -> electric-indent-mode
+;; a -> auto-newline
+;; h -> hungry-delete-key
+(setq indent-tabs-mode nil)
+(setq default-tab-width 4)
+(setq tab-width 4)
+(setq tab-stop-list ())
+(loop for x downfrom 40 to 1 do
+      (setq tab-stop-list (cons (* x 4) tab-stop-list)))
 
-;; (defconst my-c-style
-;;   '((c-tab-always-indent        . t)
-;;     (c-comment-only-line-offset . 4)
-;;     (c-hanging-braces-alist     . ((substatement-open after)
-;;                                    (brace-list-open)))
-;;     (c-hanging-colons-alist     . ((member-init-intro before)
-;;                                    (inher-intro)
-;;                                    (case-label after)
-;;                                    (label after)
-;;                                    (access-label after)))
-;;     (c-cleanup-list             . (scope-operator
-;;                                    empty-defun-braces
-;;                                    defun-close-semi))
-;;     (c-offsets-alist            . ((arglist-close . c-lineup-arglist)
-;;                                    (substatement-open . 0)
-;;                                    (case-label        . 4)
-;;                                    (block-open        . 0)
-;;                                    (knr-argdecl-intro . -)))
-;;     (c-echo-syntactic-information-p . t)
-;;     )
-;;   "My C Programming Style")
+(defconst my-c-style
+  '((c-tab-always-indent        . t)
+    (c-comment-only-line-offset . 4)
+    (c-hanging-braces-alist     . ((substatement-open after)
+                                   (brace-list-open)))
+    (c-hanging-colons-alist     . ((member-init-intro before)
+                                   (inher-intro)
+                                   (case-label after)
+                                   (label after)
+                                   (access-label after)))
+    (c-cleanup-list             . (scope-operator
+                                   empty-defun-braces
+                                   defun-close-semi))
+    (c-offsets-alist            . ((arglist-close . c-lineup-arglist)
+                                   (substatement-open . 0)
+                                   (case-label        . 4)
+                                   (block-open        . 0)
+                                   (knr-argdecl-intro . -)))
+    (c-echo-syntactic-information-p . t)
+    )
+  "My C Programming Style")
 
-;; ;; offset customizations not in my-c-style
-;; (setq c-offsets-alist '((member-init-intro . ++)))
+;; offset customizations not in my-c-style
+(setq c-offsets-alist '((member-init-intro . ++)))
 
-;; ;; Customizations for all modes in CC Mode.
-;; (defun my-c-mode-common-hook ()
-;;   ;; add my personal style and set it for the current buffer
-;;   (c-add-style "PERSONAL" my-c-style t)
-;;   ;; other customizations
-;;   (setq tab-width 4
-;;         ;; this will make sure spaces are used instead of tabs
-;;         indent-tabs-mode nil)
-;;   ;; we like auto-newline and hungry-delete
-;;   (c-toggle-auto-hungry-state 1)
-;;   ;; key bindings for all supported languages.  We can put these in
-;;   ;; c-mode-base-map because c-mode-map, c++-mode-map, objc-mode-map,
-;;   ;; java-mode-map, idl-mode-map, and pike-mode-map inherit from it.
-;;   (define-key c-mode-base-map "/C-m" 'c-context-line-break)
-;;   )
+;; Customizations for all modes in CC Mode.
+(defun my-c-mode-common-hook ()
+  ;; add my personal style and set it for the current buffer
+  (c-add-style "PERSONAL" my-c-style t)
+  ;; other customizations
+  (setq tab-width 4
+        ;; this will make sure spaces are used instead of tabs
+        indent-tabs-mode nil)
+  ;; we like auto-newline and hungry-delete
+  (c-toggle-auto-hungry-state 1)
+  ;; key bindings for all supported languages.  We can put these in
+  ;; c-mode-base-map because c-mode-map, c++-mode-map, objc-mode-map,
+  ;; java-mode-map, idl-mode-map, and pike-mode-map inherit from it.
+  (define-key c-mode-base-map "\C-m" 'c-context-line-break)
+  )
+(add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
+;;config tab end here
 
-;; (add-hook 'c-mode-common-hook 'my-c-mode-common-hook)
-
-;;config solarized-theme
-;; make the fringe stand out from the background
-(setq solarized-distinct-fringe-background t)
-
-;; Don't change the font for some headings and titles
-(setq solarized-use-variable-pitch nil)
-
-;; make the modeline high contrast
-(setq solarized-high-contrast-mode-line t)
-
-;; Use less bolding
-(setq solarized-use-less-bold t)
-
-;; Use more italics
-(setq solarized-use-more-italic t)
-
-;; Use less colors for indicators such as git:gutter, flycheck and similar
-(setq solarized-emphasize-indicators nil)
-
-;; Don't change size of org-mode headlines (but keep other size-changes)
-(setq solarized-scale-org-headlines nil)
-
-;; Avoid all font-size changes
-(setq solarized-height-minus-1 1)
-(setq solarized-height-plus-1 1)
-(setq solarized-height-plus-2 1)
-(setq solarized-height-plus-3 1)
-(setq solarized-height-plus-4 1)
-
-(setq x-underline-at-descent-line t)
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(load-theme 'solarized-dark t)
-;;solarized-theme end here
+;;(load-theme 'material t)
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
+(load-theme 'zenburn t)
 
 (provide 'init-packages)

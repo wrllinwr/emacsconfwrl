@@ -80,7 +80,6 @@
                                        (smex-initialize))
                                    (global-set-key [(shift meta x)] 'smex-major-mode-commands)
                                    (smex-major-mode-commands)))
-;;config for tab end here
 
 (defun move-line-up()
   "Moves current line up."

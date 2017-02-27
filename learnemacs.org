@@ -1,20 +1,206 @@
+* TUTORIAL
+Emacs快捷键
+	•	M(eta)，在 Mac 下为 Option 键
+	•	s(uper)，在 Mac 环境下为左 Command 键
+	•	S(Shift)
+	•	C(trl)
+
+C-h t 进入TUTORIAL
+C-h b 直接调出快捷键列表查询
+View next screen
+C-v 下一屏幕
+M-v 上一屏幕
+C-l  重新刷新屏幕将光标当前的内容在屏幕中间显示（如写到最下一行后，使用C-l，光标在屏幕中
+       间，下面会有半个屏幕的空白）
+BASIC CURSOR CONTROL
+
+			              Previous line, C-p
+				                   :
+				                   :
+   Backward, C-b .... Current cursor position .... Forward, C-f
+				                   :
+				                   :
+			                  Next line, C-n
+M-f 移动光标到当前单词的末尾在空白处显示
+M-b 移动光标到当前单词的首字母
+
+C-a 光标移动到行首
+C-e 光标移动到行尾
+
+M-a 光标移动到句首
+M-e 光标移动到句尾
+
+	C-f	Move forward a character
+	C-b	Move backward a character
+
+	M-f	Move forward a word
+	M-b	Move backward a word
+
+	C-n	Move to next line
+	C-p	Move to previous line
+
+	C-a	Move to beginning of line
+	C-e	Move to end of line
+
+	M-a	Move back to beginning of sentence
+	M-e	Move forward to end of sentence
+M-< (M-Shift-,) 快速移动到已打开文件的最开始
+M-> (M-Sfift-,) 快速移动到已打开文件的最后
+
+prefix argument
+C-u 8 C-n 连续的向下滚动8行（特例，C-v,M-v也是以行为单位）
+
+C-g 停止执行过久的命令，也可以取消命令（类似ESC）
+
+C-u 8 * 会插入8个*字符，只能对单个字符重复计数
+
+C-d 删除光标所在的字符
+
+M-Delback 删除光标所在的前一个单词
+
+M-d 删除光标所在的后一个单词
+
+C-k 删除光标到行尾的字符（k是kill的缩写）
+如果光标在开始，则整行被删除此时会留下Newline字符即，空白行，
+再次使用C-k会将会杀掉这一行本身，下面的内容向上移动
+C-u 2 C-k 它会把两行及其他们的Newline字符杀掉
+
+M-k 删除光标到句尾的字符
+
+删除选中区域
+C-@/C-SPC（SPC指的是Space Bar） 出现Mark set后可以使用C-p C-n C-b C-f进行块的选择
+C-w 删除选中的块
+
+C-y 粘贴：会拉回你最后一次杀掉的内容，插入到光标前面的位置
+被杀掉的可以拉回（杀掉类似于剪切）
+
+M-y yank环，必须先使用C-y一次，每按一次就会拉回上上一次被杀掉的内容
+C-h v kill-ring 查看之前都杀过哪些	
+
+C-x u 取消动作（UNDO）
+取消上一个命令的改变，类似于撤销。在同一行做重复的C-x u 就是一直撤销对这一行的操作
+例外：没有改变字符的命令不算（光标移动，滚动条）
+自行键入的字符以一群一群——每群最多20个字符———来进行处理
+C-_/C-/ 也是撤销
+
+C-x C-f 打开文件
+C-x C-v 打开文件
+C-x C-s 保存文件
+	保存文件的时候回将原来的文件备份一个以“~”结尾
+C-x C-b List Buffer 列出缓冲区，前面带*号的都是已经修改过且未保存的文件（缓冲区）
+C-x 1关闭缓冲区列表只显示一个窗口
+C-x b foo 回到foo这个缓冲区，类似文件切换
+M-x clean-buffer-list 清除所有无用缓冲区
+C-x s 对于编辑多个文件后都是存储于缓冲区中。并未保存。该命令会询问那些已被修改过的文件是否需要保存
+
+C-x 字符扩充
+M-x 有名称的命令扩充
+C-z 暂时退出emacs的命令（Mac 下emacs会崩溃，部分OS会允许此操作）
+C-z	会暂停住（suspends）Emacs，它会回到shell但不会把Emacs毁掉。在最常用的shell中，
+	使用fg或者%emacs这两种命令恢复Emacs
+
+M-x replace-string changed altered 字符串替换，当前光标后面的所有的字符串或者字符
+
+M-x recover-file 恢复文件：AUTO SAVE，自动存储会在你编辑的时候生成一个#file.x#的文件
+
+回应区：最下面一行
+状态区：回应区上面的灰色条
+- -:**TUTORIAL.cn - -L60- -58%- - - - - (Fundamental)- - -
+*表示对文件做过改动 Line 60行 （）里是当前模式
+M-x fundamental-mode
+M-x text mode
+M-x lisp mode
+不同的模式下有的一些快捷键所表现出来的形式会不太一样。例如注释
+M-；C语言插入的是/**/
+
+C-h m查看当前的主模式
+
+Auto Fill次模式编辑人类语言的时候很好用(没明白啥意思)
+
+C-s往前搜索字符串
+C-r往回搜索字符串
+
+多窗口
+C-x 2创建两个窗口(将同一个缓冲区即同一个文件分成上下两个窗口)
+C-x 3同一个缓冲区左右两个窗口
+C-x 4 C-f 上下显示2个窗口下面的是C-f新打开的文件
+C-x o光标定位到other窗口上
+C-M-v 滚动光标不在的窗口
+
+帮助
+C-h c字符
+C-h ?提供哪些帮助
+
+C-h k C-p好像我的电脑这个能查看帮助
+C-h f 函数名：查看函数的信息
+C-h v 变量名：查看变量的定义
+C-h a 查找相关命令
+M-x linum-mode 显示行号
+M-x shell
+
+
+| 快捷键                 | 说明            |
+|-----------------------+----------------|
+| M-c (capitalize-word) | 首字母改为大写   |
+| _____________________ | ______________ |
+| M-u (upcase-word)     | 全部改为大写    |
+| _____________________ | _____________  |
+| M-l (downcase-word)   | 全部改为小写    |
+| _____________________ | ______________ |
+
+
+下面该学习的
+C-h i 阅读在线使用手册(info)
+输入 e emacs 阅读emacs手册
+
+——
+          文本操作
+光标跳转到下一行:已实现  
+文件删除 d D标记按x执行
+C-x D
+创建目录 diredmode下按+
+
+删除目录 d D标记按x执行
+查找文件在某个目录下
+查找字符串在哪些文件中
+文件权限
+英汉字典 有道词典
+ftp 不是emacs该干的事
+zip 
+tar shell的活
+unzip 不需要再emacs里
+telnet 不是emacs该干的事
+中文 
+颜色 主题自带
+行号 
+正则表达式 
+列模式 occur-mode
+16进制 
+文件比较
+文件夹比较
+版本控制 git
+git：mgit
+浏览器 就让浏览器去做浏览器的活吧
+office org-mode非常强大
+DEBUG	   
+工程
+
 * URL
 * MODE
-** ort-mode
+** org-mode
 ** dired-mode
+emacs内置的无须安装额外插件
 C-x d 进入dired mode
 C-x d +创件文件夹
 C-x C-f to create file
 in the dired mode type "g" refresh dired buffer
 d:tag a file will be delete
-x:execute the tag opertion
+x:execute the tag operation
 D:delete the file right now
 R:rename files
 U:撤消tag
 C:copy file
-* IDE
-** C语言开发环境
-** *1 gtags变量函数跳转
+** *1 etags/gtags变量函数跳转
 ctrl-] 调转到函数定义的文件
 ctrl-t 返回使用跳转处
 :tags列出tags行踪
@@ -28,14 +214,42 @@ ctrl-t 返回使用跳转处
 ;;config yasnippet
 (require 'yasnippet)
 (yas-global-mode 1)
+
+用户自定义模板默认保持在"~/.emacs.d/snippets/org-mode/"
+M-x yas-new-snippet
+在菜单栏中会显示YASnippet,列表中会显示mode的快捷定义
+Emacs:How to Define Template in YASnippet
+http://ergoemacs.org/emacs/yasnippet_templates_howto.html
 ** *4 iedit 同时编辑某个变量函数可能也可以
 (global-set-key (kbd "C-c ;") 'iedit-mode)
 用此快捷键匹配某个字符串，然后编辑
+** *5 GUN Global
+** *6 python IDE
+参考http://blog.csdn.net/mikelearnscode/article/details/23022277
+$sudo apt-get install python-pip #Python2 
+$sudo apt-get install python3-pip #Python3
 
+$sudo pip install elpy rope jedi #Python2
+$sudo pip3 install elpy rope_py3k jedi #Python3
+
+#切换到pip-1.5.4.tar.gz所在目录
+$tar -zxvf pip-1.5.4.tar.gz
+$cd pip-1.5.4
+$sudo python setup.py install #Python2 
+$sudo python3 setup.py install #Python3
+
+更改pip默认安装源
+~/.pip/pip.conf
+[global]
+index-url = http://mirrors.aliyun.com/pypi/simple/
+
+.emacs
+(require 'elpy nil t)
+(elpy-enable)
 * HISTORY
 **emacs
 GUN 1976
 **lisp
 john MaCarthy 1958
 **evel
-评价函数(evel)主流语言没有实现评价函
+评价函数(evel)主流语言没有实现评价函功能
