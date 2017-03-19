@@ -1,7 +1,7 @@
 (global-set-key (kbd "<f2>") 'open-my-init-file)
 
 ;;打开recentf 最近的文件
-(global-set-key (kbd "C-c C-f") 'recentf-open-files)
+(global-set-key (kbd "C-c f") 'recentf-open-files)
 
 (global-set-key "\C-s" 'swiper)
 ;;ivy-resume 不知道干啥的 好像开启搜索C-s 并且是上一次的搜索默认词
