@@ -322,4 +322,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes/")
 (load-theme 'zenburn t)
 
+;; display undo-tree buffer on below
+(setq display-buffer-alist '(("\\*undo-tree\\*" display-buffer-below-selected)))
+
 (provide 'init-packages)
