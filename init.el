@@ -6,7 +6,8 @@
 (require 'init-keybindings)
 (require 'init-custome)
 ;;(require 'setup-helm)
-
+(require 'elisp-run-current-file)
+(require 'stardict)
           
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
