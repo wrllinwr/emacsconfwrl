@@ -44,6 +44,9 @@
 		      ggtags
 		      helm
 		      helm-gtags
+		      ;;jedi
+		      elpy
+			  neotree
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
@@ -95,9 +98,13 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 (require 'expand-region)
+;;(elpy-enable)
 (add-hook 'js2-mode-hook 'flycheck-mode-hook)
+;; (when (require 'flycheck nil t)
+;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+;;   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
-(evil-mode -1)
+(evil-mode 1)
 (global-evil-leader-mode)
 (evil-leader/set-key
   "e" 'find-file
@@ -325,4 +332,14 @@
 ;; display undo-tree buffer on below
 (setq display-buffer-alist '(("\\*undo-tree\\*" display-buffer-below-selected)))
 
+;; python environment
+;; (autoload 'jedi:setup "jedi" nil t)
+;; (add-hook 'python-mode-hook 'jedi:setup)
+;; (setq jedi:setup-keys t)
+;; (setq jedi:complete-on-dot t)
+
+;; neotree
+(add-to-list 'load-path "/home/test/.emacs.d/elpa/neotree")
+(require 'neotree)
+(global-set-key [f9] 'neotree-toggle)
 (provide 'init-packages)
