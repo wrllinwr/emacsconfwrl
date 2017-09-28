@@ -96,7 +96,6 @@
   (indent-for-tab-command))
 (global-set-key [(meta up)] 'move-line-up)
 (global-set-key [(meta down)] 'move-line-down)
-
+(global-set-key (kbd "C-c d") 'kid-sdcv-to-buffer)
+;; (global-set-key (kbd "C-c d") 'kid-star-dict)
 (provide 'init-keybindings)
-
-
