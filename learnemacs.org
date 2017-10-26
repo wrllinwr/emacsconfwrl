@@ -205,6 +205,17 @@ R:rename files
 U:撤消tag
 C:copy file
 ** *1 etags/gtags变量函数跳转
+emacs中etags的使用方法：
+
+使用etags *.[ch] 就在当前目录中生成TAGS文件
+在emacs中,把光标移动到函数名上 输入M-. 就能跳到相应的函数定义处. 第一次使用时, 
+emacs会询问TAGS文件的存放位置 缺省在当前目录下。输入M * 就能返回刚才的函数名处。输入切换到下一个tag上。
+很好用。跟在vim下使用tags一样方便
+tags的相关命令：
+M-. : 
+M-* :
+M-/ : 自动补齐
+
 ctrl-] 调转到函数定义的文件
 ctrl-t 返回使用跳转处
 :tags列出tags行踪
