@@ -104,17 +104,17 @@
 ;;   (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
 ;;   (add-hook 'elpy-mode-hook 'flycheck-mode))
 
-(evil-mode 1)
-(global-evil-leader-mode)
+;; (evil-mode 1)
+;; (global-evil-leader-mode)
 (evil-leader/set-key
-  "e" 'find-file
-  "b" 'switch-to-buffer
-  "k" 'kill-buffer)
+ "e" 'find-file
+ "b" 'switch-to-buffer
+ "k" 'kill-buffer)
 (window-numbering-mode t)
 (setq window-numbering-assign-func
       (lambda () (when (equal (buffer-name) "*Calculator*") 9)))
-(require 'evil-surround)
-(global-evil-surround-mode 1)
+;; (require 'evil-surround)
+;; (global-evil-surround-mode 1)
 (setq winner-dont-bind-my-keys t)
 (winner-mode t)
 
