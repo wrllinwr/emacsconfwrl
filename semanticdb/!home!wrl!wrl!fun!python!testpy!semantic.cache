@@ -1,0 +1,43 @@
+;; Object testpy/
+;; SEMANTICDB Tags save file
+(semanticdb-project-database-file "testpy/"
+  :tables
+  (list
+    (semanticdb-table "bb.py"
+      :major-mode 'python-mode
+      :tags 
+        '( ("time" include nil nil [1 12])
+            ("aa.py" include nil nil [14 26])
+            ("t" variable nil nil [28 35])
+            ("t" code nil nil [36 42]))          
+      :file "bb.py"
+      :pointmax 43
+      :fsize 42
+      :lastmodtime '(23077 24216 509270 984000)
+      :unmatched-syntax nil)
+    (semanticdb-table "aa.py"
+      :major-mode 'python-mode
+      :tags 
+        '( ("os" include nil nil [1 10])
+            ("bbc" code nil nil [31 34])
+            ("A" type
+               (:members 
+                  ( ("__init__" function
+                       (:suite 
+                          ( ("pass" code nil (reparse-symbol indented_block_body) [75 79]))                          
+                        :constructor-flag t)
+                        (reparse-symbol indented_block_body) [51 80])
+                    ("a1" function (:documentation "a1 doc") (reparse-symbol indented_block_body) [85 155])
+                    ("a2" function nil (reparse-symbol indented_block_body) [160 209]))                  
+                :type "class")
+                nil [36 209])
+            ("a" variable nil nil [210 217])
+            ("a" code nil nil [218 224]))          
+      :file "aa.py"
+      :pointmax 225
+      :fsize 224
+      :lastmodtime '(23077 24519 898121 382000)
+      :unmatched-syntax '((FROM 11 . 15) (AS 28 . 30))))
+  :file "!home!wrl!wrl!fun!python!testpy!semantic.cache"
+  :semantic-tag-version "2.0"
+  :semanticdb-version "2.2")

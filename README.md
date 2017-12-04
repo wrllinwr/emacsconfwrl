@@ -48,8 +48,28 @@ emacs -q -l path-to/emacsconfwrl/init.el
 	
 	使自己使用EMACS更加灵活方便，包括工程代码阅读搜索启动断点调试。
 	
+* python
 
-#BUG
+#1 Install the elpy packages
+
+#2 (elpy-enable)
+
+#3 M-x elpy-config
+
+   install application
+
+# Keybindings and function via elpy [[https://elpy.readthedocs.io/en/latest/index.html]]
+
+#Unknown
+
+#1 The prelude, name of function dispaly in the line mode that cursor in the code.
+
+#2 The prelude, hightlight and animation  cursor line.
+
+#3 The prelude, auto call <C-l> when the cursor under the center whole window.
+
+
+#BUGS
 1.[已消失]在启动emacs时时间会特别长，大概1分钟左右。
 
 	问题已经消失，原因不知道。只是把monokai主题卸载了，重新安装auto-complete。

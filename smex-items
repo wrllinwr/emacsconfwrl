@@ -1,0 +1,19 @@
+
+;; ----- smex-history -----
+(
+ jedi:install-server
+ epc:pop-to-last-server-process-buffer
+ pyvenv-activate
+ elpy-config
+ cd
+ 5x5
+ arp
+)
+
+;; ----- smex-data -----
+(
+ (jedi:install-server . 2)
+ (elpy-config . 1)
+ (pyvenv-activate . 1)
+ (epc:pop-to-last-server-process-buffer . 2)
+)
