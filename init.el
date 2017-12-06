@@ -8,6 +8,7 @@
 ;;(require 'setup-helm)
 (require 'elisp-run-current-file)
 (require 'stardict)
+(require 'multi-term)
           
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

@@ -1,13 +1,13 @@
 
 ;; ----- smex-history -----
 (
- jedi:install-server
- epc:pop-to-last-server-process-buffer
- pyvenv-activate
- elpy-config
- cd
- 5x5
- arp
+ multi-term
+ rgrep
+ package-list-packages
+ eshell-mode
+ eshell
+ shell-mode
+ shell
 )
 
 ;; ----- smex-data -----
@@ -16,4 +16,12 @@
  (elpy-config . 1)
  (pyvenv-activate . 1)
  (epc:pop-to-last-server-process-buffer . 2)
+ (shell . 1)
+ (shell-mode . 4)
+ (eshell . 1)
+ (eshell-mode . 1)
+ (eshell-bol . 2)
+ (package-list-packages . 2)
+ (multi-term . 14)
+ (rgrep . 1)
 )

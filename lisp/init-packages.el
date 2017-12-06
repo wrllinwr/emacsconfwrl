@@ -342,4 +342,7 @@
 (add-to-list 'load-path "/home/test/.emacs.d/elpa/neotree")
 (require 'neotree)
 (global-set-key [f9] 'neotree-toggle)
+
+;; multi-term
+(setq multi-term-program "/bin/zsh")
 (provide 'init-packages)

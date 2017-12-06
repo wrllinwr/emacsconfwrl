@@ -98,4 +98,13 @@
 (global-set-key [(meta down)] 'move-line-down)
 (global-set-key (kbd "C-c d") 'kid-sdcv-to-buffer)
 ;; (global-set-key (kbd "C-c d") 'kid-star-dict)
+
+;; multi-term
+(add-hook 'term-mode-hook
+          (lambda ()
+            (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
+            (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))))
+
+;; helm-show-kill-ring
+(global-set-key (kbd "C-c y") 'helm-show-kill-ring)
 (provide 'init-keybindings)

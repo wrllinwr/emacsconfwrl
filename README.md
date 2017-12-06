@@ -38,9 +38,10 @@ emacs -q -l path-to/emacsconfwrl/init.el
 
 #使用
 
-	主要查看init-keybindings.el即可大致了解该配置都使用了哪些扩展包，
-	
-及其所提供的功能。
+	主要查看init-keybindings.el即可大致了解该配置都使用了哪些扩展包，及其所提供的功能。
+	#1 C-c y helm-show-kill-ring
+	#2 M-[/] multi-term-prev/next
+	#3 *terminal* C-c C-e is ESC
 
 #未实现或者是还不会使用的地方
 
@@ -68,6 +69,8 @@ emacs -q -l path-to/emacsconfwrl/init.el
 
 #3 The prelude, auto call <C-l> when the cursor under the center whole window.
 
+#UPDATE
+	2017-12-6 add multi-term
 
 #BUGS
 1.[已消失]在启动emacs时时间会特别长，大概1分钟左右。
