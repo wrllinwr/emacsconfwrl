@@ -36,16 +36,32 @@ git clone https://github.com/wrllinwr/emacsconfwrl.git
 
 emacs -q -l path-to/emacsconfwrl/init.el
 
+## Install other library or config for emacs's mode
+
+   python
+	pip install elpy jedi rope flake8
+
+   multi-term
+	.zshrc
+		# emacs multi-term. find-file home directory is the multi-term pwd
+		if [ -n "$INSIDE_EMACS" ]; then
+		   chpwd() { print -P "\033AnSiTc %d" }
+		   print -P "\033AnSiTu %n"
+		   print -P "\033AnSiTc %d"
+        fi
+
 # 使用
 
 	主要查看init-keybindings.el即可大致了解该配置都使用了哪些扩展包，及其所提供的功能。
-	#1 C-c y helm-show-kill-ring
-	#2 M-[/] multi-term-prev/next
-	#3 *terminal* C-c C-e is ESC
+	1 C-c y helm-show-kill-ring
+	2 M-[/] multi-term-prev/next
+	3 *terminal* C-c C-e is ESC
 
 # packages
 
 ## elpy
+
+ Keybindings and function via elpy https://elpy.readthedocs.io/en/latest/index.html
 
 ## helm
 
@@ -59,15 +75,15 @@ emacs -q -l path-to/emacsconfwrl/init.el
 	
 * python
 
-#1 Install the elpy packages
+1 Install the elpy packages
 
-#2 (elpy-enable)
+2 (elpy-enable)
 
-#3 M-x elpy-config
+3 M-x elpy-config
 
    install application
 
-# Keybindings and function via elpy [https://elpy.readthedocs.io/en/latest/index.html]
+
 
 # Unknown
 
@@ -76,9 +92,6 @@ emacs -q -l path-to/emacsconfwrl/init.el
 #2 The prelude, hightlight and animation  cursor line.
 
 #3 The prelude, auto call <C-l> when the cursor under the center whole window.
-
-# UPDATE
-	2017-12-6 add multi-term
 
 # BUGS
 1.[已消失]在启动emacs时时间会特别长，大概1分钟左右。
