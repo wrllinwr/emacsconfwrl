@@ -96,6 +96,8 @@
   (indent-for-tab-command))
 (global-set-key [(meta up)] 'move-line-up)
 (global-set-key [(meta down)] 'move-line-down)
+
+;; stardict
 (global-set-key (kbd "C-c d") 'kid-sdcv-to-buffer)
 ;; (global-set-key (kbd "C-c d") 'kid-star-dict)
 
@@ -104,6 +106,21 @@
           (lambda ()
             (add-to-list 'term-bind-key-alist '("M-[" . multi-term-prev))
             (add-to-list 'term-bind-key-alist '("M-]" . multi-term-next))))
+
+;; go-to-terminal-buffer
+;; init.el (multi-term)
+(defun go-to-terminal-buffer()
+  (interactive)
+  (if (equal "*terminal<1>*" (buffer-name))
+	  (switch-to-prev-buffer)
+
+	;;;;;;;;;;; to-do
+	;; while buffer-list if buffer-live-p terminal nil else 
+	;; (multi-term)
+	(switch-to-buffer "*terminal<1>*")))
+
+;; Why in term-mode F5 is 15~
+(global-set-key (kbd "C-c t") 'go-to-terminal-buffer)
 
 ;; helm-show-kill-ring
 (global-set-key (kbd "C-c y") 'helm-show-kill-ring)
