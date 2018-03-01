@@ -21,6 +21,8 @@ plain-text基本配置完成，C、Python环境基本配置完成,其中PythonID
 		 
 		 4.使用了stardict离线词典。
 		 
+		 5.Common Lisp环境(Windows)
+		 
 
 # install
 
@@ -44,10 +46,15 @@ emacs -q -l path-to/emacsconfwrl/init.el
    multi-term
 	.zshrc
 		# emacs multi-term. find-file home directory is the multi-term pwd
+		
 		if [ -n "$INSIDE_EMACS" ]; then
+		
 		   chpwd() { print -P "\033AnSiTc %d" }
+		   
 		   print -P "\033AnSiTu %n"
+		   
 		   print -P "\033AnSiTc %d"
+		   
         fi
 
 # 使用
@@ -66,6 +73,19 @@ emacs -q -l path-to/emacsconfwrl/init.el
 ## helm
 
 ## mgit
+
+## Common Lisp(Windows)
+	1.安装slime M-x install-packages slime RET
+	2.下载sbcl安装
+	3.配置init-packages.el
+	
+		(setq inferior-lisp-program "c:/sbcl/sbcl.exe")
+		
+		(add-to-list 'load-path "c:/slime")
+		
+		(require 'slime)
+		
+		(slime-setup)
 
 # 未实现或者是还不会使用的地方
 
