@@ -46,7 +46,8 @@
 		      helm-gtags
 		      ;;jedi
 		      elpy
-			  neotree
+		      neotree
+		      slime
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
@@ -345,4 +346,11 @@
 
 ;; multi-term
 (setq multi-term-program "/bin/zsh")
+
+;; Common Lisp
+(setq inferior-lisp-program "c:/sbcl/sbcl.exe")
+(add-to-list 'load-path "c:/slime")
+(require 'slime)
+(slime-setup)
+
 (provide 'init-packages)
