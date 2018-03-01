@@ -23,6 +23,7 @@ plain-text基本配置完成，C、Python环境基本配置完成,其中PythonID
 		 
 		 5.Common Lisp环境(Windows)
 		 不知道为什么不能补全、没有语法高亮、注释等等。除了可以书写执行CL以为几乎所有的有利功能都无法工作！
+		 答案可能在这里https://github.com/JuanitoFatas/slime-user-manual
 		 
 
 # install
