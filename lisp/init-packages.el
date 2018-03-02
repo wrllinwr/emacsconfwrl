@@ -47,7 +47,7 @@
 		      ;;jedi
 		      elpy
 		      neotree
-		      slime
+		      ;;slime
 		      ) "Default packages")
 
 (setq package-selected-packages my/packages)
@@ -348,9 +348,15 @@
 (setq multi-term-program "/bin/zsh")
 
 ;; Common Lisp
-(setq inferior-lisp-program "c:/sbcl/sbcl.exe")
-(add-to-list 'load-path "c:/slime")
-(require 'slime)
-(slime-setup)
+;; (setq inferior-lisp-program "c:/sbcl/sbcl.exe")
+;; (add-to-list 'load-path "c:/slime")
+;; (require 'slime)
+;; (slime-setup)
+
+;; quicklisp
+;; https://gist.github.com/jteneycke/7947353
+(load (expand-file-name "~/quicklisp/slime-helper.el"))
+;; Replace "sbcl" with the path to your implementation
+(setq inferior-lisp-program "/usr/bin/sbcl")
 
 (provide 'init-packages)
