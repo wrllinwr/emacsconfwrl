@@ -21,9 +21,7 @@ plain-text基本配置完成，C、Python环境基本配置完成,其中PythonID
 		 
 		 4.使用了stardict离线词典。
 		 
-		 5.Common Lisp环境(Windows)
-		 不知道为什么不能补全、没有语法高亮、注释等等。除了可以书写执行CL以为几乎所有的有利功能都无法工作！
-		 答案可能在这里https://github.com/JuanitoFatas/slime-user-manual
+		 5.Common Lisp环境
 		 
 
 # install
@@ -76,18 +74,9 @@ emacs -q -l path-to/emacsconfwrl/init.el
 
 ## mgit
 
-## Common Lisp(Windows)
-	1.安装slime M-x install-packages slime RET
-	2.下载sbcl安装
-	3.配置init-packages.el
-	
-		(setq inferior-lisp-program "c:/sbcl/sbcl.exe")
-		
-		(add-to-list 'load-path "c:/slime")
-		
-		(require 'slime)
-		
-		(slime-setup)
+## Common Lisp
+	quicklisp
+	https://gist.github.com/jteneycke/7947353
 
 # 未实现或者是还不会使用的地方
 
