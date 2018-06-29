@@ -1,3 +1,7 @@
+![myicon](lisp/icon.png)
+
+<a href=""><img src="https://badges.gitter.im/Join Chat.svg" alt="Nothing"></a>
+
 # emacsconfwrl
 emacs配置,用于自学及备份。
 
