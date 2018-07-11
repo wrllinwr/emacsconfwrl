@@ -22,7 +22,7 @@
 (require 'evil-leader)
 (global-evil-leader-mode)
 
-(evil-leader/set-leader "f")
+(evil-leader/set-leader ",")
 (evil-leader/set-key "l" 'ivy-recentf)
 (evil-leader/set-key
   "d" 'dired
@@ -30,7 +30,7 @@
   "b" 'switch-to-buffer
   "k" 'kill-buffer
   "s" 'swiper
-  "p" 'helm-projectile-find-file
+  "p" 'helm-projectile-find-fily
   "nc" '0blayout-push
   "nb" '0blayout-pop
   "nk" '0blayout-kill)
@@ -221,11 +221,59 @@ Argument LAYOUT-NAME Name of the layout."
 (setq scroll-conservatively 100000)
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
+(menu-bar-mode 0)
 ;; title
 ;; (setq frame-title-format
 ;;       '((:eval (if (buffer-file-name)
 ;;                    (abbreviate-file-name (buffer-file-name))
 ;;                  "%b"))))
+
+;; theme
+
+;; vim
+;; dj: Delete current and next line. The d is delete, this j is move next line,
+;;     so d + j can delete 2 lines like 2dd.
+;; dk: Delete current and provide line.
+;; dh: Delete a char before cursor.
+;; dl: Delete a char hehind cursor.
+;;  0: Move cursor to head of line.
+;;  ^: Move cursor to head of line.
+;;  $: Move cursor to end of line.
+;; d^: Delele chars to this line head from cursor(not contain cursor).
+;; d$: Delete chars to this line end from cursor(contain cursor).
+;; gj: When have a long line display more line. Can prefix key "g",
+;;     will move that position.
+;; gk:
+;; gh:
+;; gl:
+;; motion:
+;;  w:
+;;  e:
+;;  b:
+;; fc:
+;; tc:
+;; Fc:
+;; Tc:
+;;  %:
+;;  #:
+;;  r:
+;;  R:
+;; c-i:
+;; c-]:
+;; c-o:
+;; c-h:
+;; c-m:
+;; c-l:
+
+
+
+
+;; asdf this an org-babel-no-eval-on-ctrl-c-ctrl-c some.
+;; sdfewf 123, sdfa.
+;; sdfsdfa assdfsdfjlkjoiwe
+;; asdfasdfa
+
+
 
 
 (provide 'init-local)
