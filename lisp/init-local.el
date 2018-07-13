@@ -12,6 +12,11 @@
 (define-key evil-insert-state-map
   (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
 
+;; at normal mode use C-w
+;; (define-key evil-normal-state-map "C-w" 'whole-line-or-region-delete)
+
+;; at normal mode use C-e
+(define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
 
 ;; but [escape] should switch back to normal state
 (define-key evil-insert-state-map [escape] 'evil-normal-state)
@@ -22,15 +27,16 @@
 (require 'evil-leader)
 (global-evil-leader-mode)
 
-(evil-leader/set-leader ",")
+(evil-leader/set-leader "f")
 (evil-leader/set-key "l" 'ivy-recentf)
 (evil-leader/set-key
+  "b" 'switch-to-buffer
   "d" 'dired
   "e" 'find-file
-  "b" 'switch-to-buffer
+  "f" 'evil-find-char  ;; (kbd "C-;") evil-goto-char-timer
   "k" 'kill-buffer
-  "s" 'swiper
   "p" 'helm-projectile-find-fily
+  "s" 'swiper
   "nc" '0blayout-push
   "nb" '0blayout-pop
   "nk" '0blayout-kill)
@@ -222,11 +228,19 @@ Argument LAYOUT-NAME Name of the layout."
 (scroll-bar-mode 0)
 (tool-bar-mode 0)
 (menu-bar-mode 0)
+(setq inhibit-startup-screen t)
+(global-hl-line-mode 1)
+;; (set-face-attribute 'mode-line nil :background nil)
+
 ;; title
 ;; (setq frame-title-format
 ;;       '((:eval (if (buffer-file-name)
 ;;                    (abbreviate-file-name (buffer-file-name))
 ;;                  "%b"))))
+
+;; auto-dictionary
+;; (require 'auto-dictionary)
+;; (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
 
 ;; theme
 
@@ -254,6 +268,10 @@ Argument LAYOUT-NAME Name of the layout."
 ;; tc:
 ;; Fc:
 ;; Tc:
+;;  r: replace a char
+;;  R: replace chars
+;;  c:
+;;  s: delete char and change insert mode
 ;;  %:
 ;;  #:
 ;;  r:
