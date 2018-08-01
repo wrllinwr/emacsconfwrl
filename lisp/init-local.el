@@ -3,6 +3,8 @@
 
 ;; (add-to-list 'load-path "~/.emacs.d/elpa-25.3/evil-20180517.1300")
 (add-to-list 'load-path "~/.emacs.d/elpa-25.3/evil-20180517.1300")
+(global-set-key (kbd "C-w") 'backward-kill-word)
+;; (define-key evil-normal-state-map (kbd "C-w") 'backward-kill-word)
 (require 'evil)
 (evil-mode 1)
 ;; remove all keybindings from insert-state keymap,it is VERY VERY important
@@ -16,8 +18,11 @@
 ;; (define-key evil-normal-state-map "C-w" 'whole-line-or-region-delete)
 
 ;; at normal mode use C-e
-(define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
+;; (define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
+(define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-line)
 
+;; only normal and pyhthon
+;; (define-key evil-normal-state-map (kbd "M-.") 'anaconda-mode-find-definitions)
 ;; but [escape] should switch back to normal state
 (define-key evil-insert-state-map [escape] 'evil-normal-state)
 
@@ -29,12 +34,15 @@
 
 (evil-leader/set-leader "f")
 (evil-leader/set-key "l" 'ivy-recentf)
+(ido-mode 1)
 (evil-leader/set-key
-  "b" 'switch-to-buffer
-  "d" 'dired
-  "e" 'find-file
+  ;; "b" 'switch-to-buffer
+  "b" 'ido-switch-buffer
+  "d" 'ido-dired
+  ;; "e" 'find-file
+  "e" 'ido-find-file
   "f" 'evil-find-char  ;; (kbd "C-;") evil-goto-char-timer
-  "k" 'kill-buffer
+  "k" 'ido-kill-buffer
   "p" 'helm-projectile-find-fily
   "s" 'swiper
   "nc" '0blayout-push
@@ -48,6 +56,18 @@
 (setq-default evil-escape-key-sequence "jk")
 (setq-default evil-escape-delay 0.2)
 (evil-escape-mode 1)
+
+;; what is it?
+(require 'powerline-evil)
+
+;; evil-surround
+;; add "" '' () to the selected word
+;; 1. v-i-w to make motion
+;; 2. S  is not super key
+;; 3. "" , '' or other you want.
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+
 ;; multi-term
 ;; Note, prelude config has keybind C-c t.
 ;; comment his code at core/prelude-mode.el and defvar prelude-mode-map.
@@ -188,7 +208,7 @@ Argument LAYOUT-NAME Name of the layout."
 ;; pip install jedi
 ;; pip install flake8
 ;; pip install importmagic
-(elpy-enable)
+;; (elpy-enable)
 ;; C-c C-d elpy-doc
 ;; M-.  ;; elpy-goto-definition
 ;; M-*/C-t  ;; pop-tag-mark
@@ -206,6 +226,10 @@ Argument LAYOUT-NAME Name of the layout."
 
 ;; code fold
 ;; wrl-fold.el
+
+;; anaconda-mode
+;; (add-hook 'python-mode-hook 'anaconda-mode)
+;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; fuck end python IDE
 
 
@@ -229,7 +253,7 @@ Argument LAYOUT-NAME Name of the layout."
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (setq inhibit-startup-screen t)
-(global-hl-line-mode 1)
+(global-hl-line-mode -1)
 ;; (set-face-attribute 'mode-line nil :background nil)
 
 ;; title
@@ -243,8 +267,9 @@ Argument LAYOUT-NAME Name of the layout."
 ;; (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
 
 ;; theme
+(load-theme 'monokai)
 
-;; vim
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; vim
 ;; dj: Delete current and next line. The d is delete, this j is move next line,
 ;;     so d + j can delete 2 lines like 2dd.
 ;; dk: Delete current and provide line.
@@ -282,16 +307,42 @@ Argument LAYOUT-NAME Name of the layout."
 ;; c-h:
 ;; c-m:
 ;; c-l:
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;vim end
 
+;; better-default
+;; (add-to-list 'load-path "~/.emacs.d/elpa-25.3/better-defaults-20170613.2104")
+;; (require 'better-defaults)
 
+;; mwin
+(global-set-key (kbd "C-a") 'mwim-beginning)
+(global-set-key (kbd "C-e") 'mwim-end)
+;; M-m back-to-indentation
+(global-set-key (kbd "M-x") 'smex)
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Chinese input method
+;; eim
+;; C-h I describe-input-method
+(add-to-list 'load-path "~/.emacs.d/site-lisp/eim")
+(autoload 'eim-use-package "eim" "Another emacs input method")
+;; (setq eim-use-tooltip nil)
+(register-input-method
+ "eim-py" "euc-cn" 'eim-use-package
+ "拼音" "汉字拼音输入法" "py.txt")
 
-;; asdf this an org-babel-no-eval-on-ctrl-c-ctrl-c some.
-;; sdfewf 123, sdfa.
-;; sdfsdfa assdfsdfjlkjoiwe
-;; asdfasdfa
+(require 'eim-extra)
+(global-set-key ";" 'eim-insert-ascii)
 
+;; pyim
+;; (require 'pyim)
+;; (require 'pyim-basedict)
+;; (pyim-basedict-enable)
+;; (setq default-input-method "pyim")
 
+;; bing-directory need network
+;; M-x bing-dict-brief
+;; (add-to-list 'load-path "~/.emacs.d/elpa-25.3/bing-dict-20170604.1831")
+;; (require 'bing-dict)
 
+;; crux
 
 (provide 'init-local)
