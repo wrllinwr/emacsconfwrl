@@ -5,9 +5,7 @@
 # emacsconfwrl
 emacs配置,用于自学及备份。
 
-The elpa has all packages for emacs need, because sometime acces failed when
-
- install some packages 
+The elpa has all packages for emacs need.
 
 # 主要特点
 
