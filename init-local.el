@@ -1,0 +1,418 @@
+(require 'which-key)
+(which-key-mode)
+;; tab witdh
+(add-hook 'c-mode-common-hook
+	  (lambda ()
+	    (setq c-basic-offset 4)
+	    (setq tab-width 4)
+	    (setq indent-tabs-mode nil)))
+
+;; undo tree
+(require 'undo-tree)
+(global-undo-tree-mode)
+
+;; auto complete
+(require 'auto-complete)
+(require 'auto-complete-config)
+(ac-config-default)
+(setq ac-quick-help-delay 0.5)
+;;(ac-set-trigger-key "TAB")
+;;(define-key ac-mode-map  [(control tab)] 'auto-complete)
+(define-key ac-mode-map (kbd "M-/") 'auto-complete)
+;; (define-key ac-mode-map (kbd "\C-n") 'ac-nect)
+;; (define-key ad-mode-map (kbd "\C-p") 'ac-previous)
+
+;; evil mode
+(require 'evil)
+(evil-mode 1)
+
+;; () [] {} ""
+(electric-pair-mode 1)
+
+(define-key evil-normal-state-map (kbd "C-w") 'backward-kill-word)
+(global-set-key (kbd "C-w") 'backward-kill-word)
+(define-key evil-motion-state-map (kbd "C-z") 'suspend-frame)
+(define-key evil-emacs-state-map (kbd "C-z") 'suspend-frame)
+(define-key evil-motion-state-map (kbd "C-x C-z") 'evil-emacs-state)
+(define-key evil-emacs-state-map (kbd "C-x C-z") 'evil-exit-emacs-state)
+
+;; remove all keybindings from insert-state keymap,it is VERY VERY important
+(setcdr evil-insert-state-map nil)
+
+;;;把emacs模式下的按键绑定到Insert模式下
+(define-key evil-insert-state-map
+  (read-kbd-macro evil-toggle-key) 'evil-emacs-state)
+
+;; at normal mode use C-w
+;; (define-key evil-normal-state-map "C-w" 'whole-line-or-region-delete)
+
+;; at normal mode use C-e
+;; (define-key evil-normal-state-map (kbd "C-e") 'move-end-of-line)
+(define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-line)
+
+;; only normal and pyhthon
+;; (define-key evil-normal-state-map (kbd "M-.") 'anaconda-mode-find-definitions)
+;; but [escape] should switch back to normal state
+(define-key evil-insert-state-map [escape] 'evil-normal-state)
+
+;; evil-leader
+;; (add-to-list 'load-path "~/.emacs.d/elpa-24.5/evil-leader-20140606.543")
+;; (add-to-list 'load-path "~/.emacs.d/elpa-25.3/evil-leader-20140606.543")
+(require 'evil-leader)
+(global-evil-leader-mode)
+(ido-mode 1)
+
+(evil-leader/set-leader "f")
+;; (evil-leader/set-key "l" 'ivy-recentf)
+(evil-leader/set-key "l" 'counsel-recentf)
+(evil-leader/set-key
+  "mf" 'mark-defun
+  "gd" 'counsel-etags-find-tag-at-point
+  "xr" 'xref-find-references
+  "ci" 'counsel-imenu ;; list all function
+  "cr" 'kill-region ;; cut retion
+  "gc" 'avy-goto-char
+  "gl" 'avy-goto-line
+  "cl" 'avy-copy-line
+  ;; "b" 'switch-to-buffer
+  "b" 'ido-switch-buffer
+  "d" 'ido-dired
+  ;; "e" 'find-file
+  "e" 'ido-find-file
+  "f" 'evil-find-char  ;; (kbd "C-;") evil-goto-char-timer
+  "k" 'ido-kill-buffer
+  "p" 'helm-projectile-find-fily
+  "s" 'swiper
+  "nc" '0blayout-push
+  "nb" '0blayout-pop
+  "nk" '0blayout-kill)
+
+;; evil-escapevil
+;; This is good keybind, in the insert-state just press j and k in 0.2s
+;; will change to normal-state
+(setq-default evil-escape-key-sequence "jk")
+(setq-default evil-escape-delay 0.2)
+(evil-escape-mode 1)
+
+;; what is it?
+(require 'powerline-evil)
+
+;; evil-surround
+;; add "" '' () to the selected word
+;; 1. v-i-w to make motion
+;; 2. S  is not super key
+;; 3. "" , '' or other you want.
+(require 'evil-surround)
+(global-evil-surround-mode 1)
+
+;; multi-term
+;; Note, prelude config has keybind C-c t.
+;; comment his code at core/prelude-mode.el and defvar prelude-mode-map.
+(add-to-list 'load-path "~/.emacs.d/lisp/multi-term.el")
+(require 'multi-term)
+(setq multi-term-program "/bin/bash")
+
+(defun go-to-terminal-buffer()
+  (interactive)
+  (if (equal "*terminal<1>*" (buffer-name))
+      (switch-to-prev-buffer)
+
+    ;;;;;;;;;;; to-do
+    ;; while buffer-list if buffer-live-p terminal nil else
+    ;; (multi-term)
+    (switch-to-buffer "*terminal<1>*")))
+
+;; Why in term-mode F5 is 15~
+(global-set-key (kbd "C-c t") 'go-to-terminal-buffer)
+
+;; window-numbering
+;; (add-to-list 'load-path "/root/.emacs.d/elpa-24.5/window-numbering-20160809.1110")
+;; (add-to-list 'load-path "/root/.emacs.d/elpa-25.3/window-numbering-20160809.1110")
+(require 'window-numbering)
+(window-numbering-mode t)
+(setq window-numbering-assign-func
+      (lambda () (when (equal (buffer-name) "*Calculator*") 9)))
+
+;; M-up M-down Why it's not work
+(defun move-text-internal (arg)
+   (cond
+    ((and mark-active transient-mark-mode)
+     (if (> (point) (mark))
+            (exchange-point-and-mark))
+     (let ((column (current-column))
+              (text (delete-and-extract-region (point) (mark))))
+       (forward-line arg)
+       (move-to-column column t)
+       (set-mark (point))
+       (insert text)
+       (exchange-point-and-mark)
+       (setq deactivate-mark nil)))
+    (t
+     (beginning-of-line)
+     (when (or (> arg 0) (not (bobp)))
+       (forward-line)
+       (when (or (< arg 0) (not (eobp)))
+            (transpose-lines arg))
+       (forward-line -1)))))
+
+(defun move-text-down (arg)
+   "Move region (transient-mark-mode active) or current line
+  arg lines down."
+   (interactive "*p")
+   (move-text-internal arg))
+
+(defun move-text-up (arg)
+   "Move region (transient-mark-mode active) or current line
+  arg lines up."
+   (interactive "*p")
+   (move-text-internal (- arg)))
+
+;; (defun my-move-line-up()
+;;   "Moves current line up."
+;;   (interactive)
+;;   (transpose-lines 1)
+;;   (previous-line)
+;;   (previous-line)
+;;   (indent-for-tab-command)
+;;   )
+;; (defun my-move-line-down ()
+;;   "Moves current line down."
+;;   (interactive)
+;;   (move-text-line-down)
+;;   (indent-for-tab-command))
+
+(global-set-key [(meta down)] 'move-text-down)
+(global-set-key [(meta up)] 'move-text-up)
+
+;; C-RET new-line
+(global-set-key [(control return)] '(lambda()
+                                      (interactive)
+                                      (move-end-of-line 1)
+                                      (message "end of the line")
+                                      ;;(indent-for-tab-command)
+                                      (newline)
+                                      (indent-for-tab-command)
+                                      ))
+
+;; (defun qiang-comment-dwim-line (&optional arg)
+;;   ;; Replacement for the comment-dwim command. If no region is selected and
+;;   ;; current line is not blank and we are not at the end of the line, then
+;;   ;; comment current line. Replaces default behaviour of comment-dwim, when it
+;;   ;; inserts comment at the end of the line.
+
+;;   (interactive "*P")
+;;   (comment-normalize-vars)
+;;   (if (and (not (region-active-p)) (not (looking-at "[ \t]*$")))
+;;       (comment-or-uncomment-region (line-beginning-position) (line-end-position))
+;;     (comment-dwim arg)))
+;; (global-set-key "\M-;" 'qiang-comment-dwim-line)
+
+;; 0blayout
+;; (add-to-list 'load-path "~/.emacs.d/elpa-24.5/0blayout-20161007.2307")
+;; (add-to-list 'load-path "~/.emacs.d/elpa-25.3/0blayout-20161007.2307")
+(require '0blayout)
+(0blayout-mode 1)
+
+;; 0xc
+;; 0xc-convert:input a number(0-f,only one number) and input 0x/0b/0t/0o/0d
+;; 0xc-convert-at-point: convert number to 0d
+
+(defun 0blayout-push (layout-name)
+  "0blayout saving function.
+Argument LAYOUT-NAME Name of the layout."
+  (interactive "sEnter name of current layout: ")
+  (set-frame-parameter nil '0blayout-current layout-name)
+  (0blayout-save)
+  (message "Saved layout: '%s'" (0blayout-get-current-name))
+  )
+
+(defun 0blayout-pop (layout-name)
+  "0blayout pop function.
+Argument LAYOUT-NAME Name of the layout."
+  (interactive
+   (list
+    (completing-read "Layout to pop up: " 0blayout-alist)))
+
+  (let ((layout (assoc (intern layout-name) 0blayout-alist)))
+    (if (eq layout nil)
+        (message "No layout with name: '%s' is defined" layout-name)
+      (progn
+        (set-window-configuration (cdr layout))
+        (0blayout-set-current-name layout-name)
+        (message "Pop up to layout: '%s'" layout-name)))))
+
+
+(defun 0blayout-kill ()
+  "0blayout removal function."
+  (interactive)
+
+  (message "Killing layout: '%s'" (0blayout-get-current-name))
+
+  ;; Remove current layout from known layouts
+  (setq 0blayout-alist
+        (assq-delete-all (intern (0blayout-get-current-name)) 0blayout-alist))
+
+  ;; Switch to next layout in the list
+  (let ((new-layout (car (car 0blayout-alist))))
+    (if (eq new-layout nil)
+        ;; If there's no other layout, make a new default layout
+        (progn
+          (0blayout-set-current-name 0blayout-default)
+          (0blayout-new 0blayout-default))
+
+      ;; Switch to some other saved layout
+      (progn
+        (set-window-configuration (cdr (car 0blayout-alist)))
+        (0blayout-set-current-name (symbol-name new-layout))))))
+
+;; gun global
+(load "~/.emacs.d/lisp/gtags.el")
+(autoload 'gtags-mode "gtags" "" t)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/elisp-run-current-file.el")
+(require 'elisp-run-current-file)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; fuck python IDE
+;; http://chillaranand.github.io/emacs-py-ide/
+;; pip install rope
+;; pip install jedi
+;; pip install flake8
+;; pip install importmagic
+;; (elpy-enable)
+;; C-c C-d elpy-doc
+;; M-.  ;; elpy-goto-definition
+;; M-*/C-t  ;; pop-tag-mark
+;; M-<n>  ;; select nth item
+
+;; #Debugging
+;; #Debug using pdb.
+;; import ipdb
+;; ipdb.set_trace()
+
+;; #Test Integration
+;; #Configure Your Test Runner.
+;;M-x elpy-set-test-runner
+;;C-c C-t  ;; runs test/ all tests
+
+;; code fold
+;; wrl-fold.el
+
+;; anaconda-mode
+;; (add-hook 'python-mode-hook 'anaconda-mode)
+;; (add-hook 'python-mode-hook 'anaconda-eldoc-mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; fuck end python IDE
+
+
+;; avy-got-char
+;; C-; evil-goto-char-timer
+
+;; C-x C-; comment-line
+
+;; (kbd "g ;") goto-last-change
+;; back the cursor location
+
+;; blink-cursor-mode
+(blink-cursor-mode -1)
+
+;; (kbd ".") evil-repeat
+;; Repeat the last editing command with count replaced by COUNT
+
+;; do not auto C-l
+(setq scroll-conservatively 100000)
+(scroll-bar-mode 0)
+(tool-bar-mode 0)
+(menu-bar-mode 0)
+(setq inhibit-startup-screen t)
+(global-hl-line-mode -1)
+;; (set-face-attribute 'mode-line nil :background nil)
+
+;; title
+;; (setq frame-title-format
+;;       '((:eval (if (buffer-file-name)
+;;                    (abbreviate-file-name (buffer-file-name))
+;;                  "%b"))))
+
+;; auto-dictionary
+;; (require 'auto-dictionary)
+;; (add-hook 'flyspell-mode-hook (lambda () (auto-dictionary-mode 1)))
+
+;; theme
+;; (load-theme 'monokai)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; vim
+;; dj: Delete current and next line. The d is delete, this j is move next line,
+;;     so d + j can delete 2 lines like 2dd.
+;; dk: Delete current and provide line.
+;; dh: Delete a char before cursor.
+;; dl: Delete a char hehind cursor.
+;;  0: Move cursor to head of line.
+;;  ^: Move cursor to head of line.
+;;  $: Move cursor to end of line.
+;; d^: Delele chars to this line head from cursor(not contain cursor).
+;; d$: Delete chars to this line end from cursor(contain cursor).
+;; gj: When have a long line display more line. Can prefix key "g",
+;;     will move that position.
+;; gk:
+;; gh:
+;; gl:
+;; motion:
+;;  w:
+;;  e:
+;;  b:
+;; fc:
+;; tc:
+;; Fc:
+;; Tc:
+;;  r: replace a char
+;;  R: replace chars
+;;  c:
+;;  s: delete char and change insert mode
+;;  %:
+;;  #:
+;;  r:
+;;  R:
+;; c-i:
+;; c-]:
+;; c-o:
+;; c-h:
+;; c-m:
+;; c-l:
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;vim end
+
+;; better-default
+;; (add-to-list 'load-path "~/.emacs.d/elpa-25.3/better-defaults-20170613.2104")
+;; (require 'better-defaults)
+
+;; mwim
+(global-set-key (kbd "C-a") 'mwim-beginning)
+(global-set-key (kbd "C-e") 'mwim-end)
+;; M-m back-to-indentation
+(global-set-key (kbd "M-x") 'smex)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;Chinese input method
+;; eim
+;; C-h I describe-input-method
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/eim")
+;; (autoload 'eim-use-package "eim" "Another emacs input method")
+;; (setq eim-use-tooltip nil)
+;; (register-input-method
+ ;; "eim-py" "euc-cn" 'eim-use-package
+ ;; "拼音" "汉字拼音输入法" "py.txt")
+
+;; (require 'eim-extra)
+;; (global-set-key ";" 'eim-insert-ascii)
+
+;; pyim
+;; (require 'pyim)
+;; (require 'pyim-basedict)
+;; (pyim-basedict-enable)
+;; (setq default-input-method "pyim")
+
+;; bing-directory need network
+;; M-x bing-dict-brief
+;; (add-to-list 'load-path "~/.emacs.d/elpa-25.3/bing-dict-20170604.1831")
+;; (require 'bing-dict)
+
+;; crux
+
+(provide 'init-local)
