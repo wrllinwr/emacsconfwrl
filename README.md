@@ -1,8 +1,9 @@
 ![myicon](lisp/icon.png)
 
 <a href=""><img src="https://badges.gitter.im/Join Chat.svg" alt="Nothing"></a>
-
-# emacsconfwrl
+# lighingconf branch
+just use init.el and init-local.el
+# emacsconfwrl  
 emacs配置,用于自学及备份。
 
 The elpa has all packages for emacs need.
