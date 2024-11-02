@@ -3,6 +3,7 @@
 <a href=""><img src="https://badges.gitter.im/Join Chat.svg" alt="Nothing"></a>
 # lighingconf branch
 Just use init.el and init-local.el,For C/C++.
+
 sudo dnf install clangd
 # emacsconfwrl
 emacs配置,用于自学及备份。
