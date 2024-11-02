@@ -1,3 +1,23 @@
+;; C/C++
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+(require 'flycheck)
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(require 'projectile)
+(projectile-mode +1)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(require 'lsp-mode)
+(add-hook 'c++-mode-hook #'lsp)
+(add-hook 'c-mode-hook #'lsp)
+(setq lsp-clients-clangd-executable "/usr/bin/clangd")
+;; Syntax Highlighting and Indentation
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
+
+
+;; neotree
+(require 'neotree)
 (require 'which-key)
 (which-key-mode)
 ;; tab witdh
@@ -25,6 +45,27 @@
 ;; evil mode
 (require 'evil)
 (evil-mode 1)
+(defun my-counsel-etags-find-tag-at-point ()
+  "Find tag at point using counsel-etags and recenter the view."
+  (interactive)
+  (counsel-etags-find-tag-at-point)
+  (recenter-top-bottom))  ;; This will move the cursor to the top of the window
+;; Use eval-after-load to set the keybinding after Evil mode has been loaded
+(eval-after-load 'evil
+  ;; The lambda function will be executed after Evil mode is loaded
+  '(progn
+     ;; Unbind C-] from evil-jump-to-tag
+     (define-key evil-normal-state-map (kbd "C-]") nil)
+     ;; Bind C-] to counsel-etags-find-tag-at-point
+     (define-key evil-normal-state-map (kbd "C-]") 'my-counsel-etags-find-tag-at-point)))
+
+;; Alternatively, if you prefer to use hooks:
+(add-hook 'evil-after-load-hook
+          (lambda ()
+            ;; Unbind C-] from evil-jump-to-tag
+            (define-key evil-normal-state-map (kbd "C-]") nil)
+            ;; Bind C-] to counsel-etags-find-tag-at-point
+            (define-key evil-normal-state-map (kbd "C-]") 'my-counsel-etags-find-tag-at-point)))
 
 ;; () [] {} ""
 (electric-pair-mode 1)
@@ -35,6 +76,8 @@
 (define-key evil-emacs-state-map (kbd "C-z") 'suspend-frame)
 (define-key evil-motion-state-map (kbd "C-x C-z") 'evil-emacs-state)
 (define-key evil-emacs-state-map (kbd "C-x C-z") 'evil-exit-emacs-state)
+
+
 
 ;; remove all keybindings from insert-state keymap,it is VERY VERY important
 (setcdr evil-insert-state-map nil)
@@ -61,7 +104,7 @@
 (require 'evil-leader)
 (global-evil-leader-mode)
 (ido-mode 1)
-
+(setq recentf-exclude '("~/.emacs.d/ido.last"))
 (evil-leader/set-leader "f")
 ;; (evil-leader/set-key "l" 'ivy-recentf)
 (evil-leader/set-key "l" 'counsel-recentf)
@@ -69,6 +112,7 @@
   "mf" 'mark-defun
   "gd" 'counsel-etags-find-tag-at-point
   "xr" 'xref-find-references
+  "xg" 'xref-show-location-at-point
   "ci" 'counsel-imenu ;; list all function
   "cr" 'kill-region ;; cut retion
   "gc" 'avy-goto-char
@@ -185,6 +229,7 @@
 (global-set-key [(meta up)] 'move-text-up)
 
 ;; C-RET new-line
+;; Not work.
 (global-set-key [(control return)] '(lambda()
                                       (interactive)
                                       (move-end-of-line 1)
@@ -414,5 +459,4 @@ Argument LAYOUT-NAME Name of the layout."
 ;; (require 'bing-dict)
 
 ;; crux
-
 (provide 'init-local)
