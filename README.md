@@ -2,13 +2,14 @@
 
 <a href=""><img src="https://badges.gitter.im/Join Chat.svg" alt="Nothing"></a>
 # lighingconf branch
-just use init.el and init-local.el
-# emacsconfwrl  
+Just use init.el and init-local.el,For C/C++.
+sudo dnf install clangd
+# emacsconfwrl
 emacs配置,用于自学及备份。
 
-The elpa has all packages for emacs need.
+The elpa has all packages for emacs need.                   
 
-# 主要特点
+# 主要特点  
 
 本配置参照“子龙山人”第二季视频配置学习，按照自身使用习惯部分功能未参考。
 
